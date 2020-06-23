@@ -105,8 +105,49 @@ table {
 .tags-section{
     .tags-inner-div{
         Button{
-            margin-bottom: 0.25rem 
+            margin-bottom: 0.25rem;
+            border-radius: 18px;
         }
         
+    }
+}
+.editor-form{
+    width: 80%;
+    margin: 0 auto;
+}
+.settings-form{
+    
+    width: 60%;
+    margin: 0 auto;
+    margin-bottom: 2rem;
+}
+.profile-hero-section{
+    position: relative;
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 240px;
+    background-color: #999999;
+    .profile-picture-div{
+        width: 144px;
+        height: 144px;
+        
+        height: auto;
+        img{
+            width: 100%;
+            border-radius: 50%;
+        }
+        
+    }
+    .profile-settings-btn-div{
+        position: absolute;
+        bottom: 20px;
+        right: 60px;
+    }
+}
+.profile-div{
+    .profile-articles{
+        margin-top: 1.5rem;
     }
 }
