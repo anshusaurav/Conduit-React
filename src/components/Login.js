@@ -1,14 +1,18 @@
-import React from 'react';
-import {Input, Button} from 'semantic-ui-react';
+import React from 'react'
+import { Input, Button } from 'semantic-ui-react'
 class Login extends React.Component {
   render () {
     return (
-      <div>
+      <div className='login-div'>
         <h2>Sign In</h2>
-        <Input type='email' placeholder='email'/>
-        <Input type='password' placeholder='password' />
-        <Button primary>Sign In</Button>
-        <Button secondary>Reset</Button>
+        <div className='login-input-div'>
+          <Input size='large' type='email' placeholder='email' />
+          <Input size='large' type='password' placeholder='password' />
+          <div className='login-btn-div'>
+            <Button primary>Sign In</Button>
+            <Button secondary>Reset</Button>
+          </div>
+        </div>
       </div>
     )
   }

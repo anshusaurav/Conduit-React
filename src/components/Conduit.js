@@ -5,26 +5,54 @@ import Login from './Login'
 import Register from './Register'
 import Home from './Home'
 class Conduit extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      isLoggedIn: false,
+
+
+    }
+  }
   render () {
     return (
       <Router>
-        <div>
-          <div>
-            <ul>
-              <li>
-                <Link to='/'>Home</Link>
-              </li>
-              <li>
-                <Link to='/login'>Sign In</Link>
-              </li>
-              <li>
-                <Link to='/register'>Sign Up</Link>
-              </li>
-            </ul>
+        <div className='container'>
+          <div className='header'>
+            <h1>
+              <Link to='/'>conduit</Link>
+            </h1>
+            {!this.state.isLoggedIn ? (
+              <ul>
+                <li>
+                  <Link to='/'>Home</Link>
+                </li>
+                <li>
+                  <Link to='/login'>Sign In</Link>
+                </li>
+                <li>
+                  <Link to='/register'>Sign Up</Link>
+                </li>
+              </ul>
+            ) : (
+              <ul>
+                <li>
+                  <Link to='/'>Home</Link>
+                </li>
+                <li>
+                  <Link to='/login'>New Post</Link>
+                </li>
+                <li>
+                  <Link to='/register'>Settings</Link>
+                </li>
+                <li>
+                  <Link to='/anshusaurav'>anshusaurav</Link>
+                </li>
+              </ul>
+            )}
           </div>
           <Switch>
             <Route exact path='/'>
-              <Home />
+              <Home isLoggedIn={this.state.isLoggedIn}/>
             </Route>
             <Route path='/login'>
               <Login />
