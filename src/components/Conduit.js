@@ -9,7 +9,7 @@ class Conduit extends React.Component {
     super(props)
     this.state = {
       isLoggedIn: true,
-
+      isTagClicked: true
 
     }
   }
@@ -39,20 +39,20 @@ class Conduit extends React.Component {
                   <Link to='/'>Home</Link>
                 </li>
                 <li>
-                  <Link to='/login'>New Post</Link>
+                  <Link to='/editor'>New Post</Link>
                 </li>
                 <li>
-                  <Link to='/register'>Settings</Link>
+                  <Link to='/settings'>Settings</Link>
                 </li>
                 <li>
-                  <Link to='/anshusaurav'>anshusaurav</Link>
+                  <Link to='/profile'>anshusaurav</Link>
                 </li>
               </ul>
             )}
           </div>
           <Switch>
             <Route exact path='/'>
-              <Home isLoggedIn={this.state.isLoggedIn}/>
+              <Home isLoggedIn={this.state.isLoggedIn} isTagClicked={this.state.isTagClicked}/>
             </Route>
             <Route path='/login'>
               <Login />

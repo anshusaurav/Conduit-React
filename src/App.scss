@@ -86,4 +86,27 @@ table {
 .hero-unsigned{
     text-align: center;
     background-color: yellowgreen;
+    padding: 0.5rem;
+    h2{
+        font-size: 2.5rem;
+        font-weight: 800;
+    }
+}
+
+.main-section{
+    margin-top: 1.5rem;
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    grid-gap: 0.5rem;
+
+    
+}
+
+.tags-section{
+    .tags-inner-div{
+        Button{
+            margin-bottom: 0.25rem 
+        }
+        
+    }
 }
