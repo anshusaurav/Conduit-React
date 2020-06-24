@@ -1,6 +1,8 @@
 import React from 'react'
-import { Tab, Button } from 'semantic-ui-react'
+import { Tab} from 'semantic-ui-react'
 import HeroSection from './HeroSection'
+import TagsAside from './TagsAside'
+import ArticleList from './ArticleList'
 class Home extends React.Component {
   constructor (props) {
     super(props)
@@ -49,10 +51,76 @@ class Home extends React.Component {
     }
     this.state.activeIndex = 0
   }
-  static get COLORLIST() {
-    return ['re d', 'orange', 'yellow', 'green', 'teal', 'blue','violet', 'purple', 'pink','brown'];
+  
+  async componentDidMount () {
+    if (this.props.isLoggedIn) {
+
+      if (this.props.isTagClicked) {
+        this.setState({
+          panes: [
+            {
+              menuItem: 'Your Feed',
+              render: () => <Tab.Pane>Tab 1 Content</Tab.Pane>
+            },
+            {
+              menuItem: 'Global Feed',
+              render: () => <Tab.Pane>Tab 2 Content</Tab.Pane>
+            },
+            {
+              menuItem: '#Tag',
+              render: () => <Tab.Pane>Tab 3 Content</Tab.Pane>
+            }
+          ]
+        });
+        
+      } else {
+        this.setState({
+          panes: [
+            {
+              menuItem: 'Your Feed',
+              render: () => <Tab.Pane>Tab 1 Content</Tab.Pane>
+            },
+            {
+              menuItem: 'Global Feed',
+              render: () => <Tab.Pane>Tab 2 Content</Tab.Pane>
+            }
+          ]
+        });
+        
+      }
+    } else {
+      // https://conduit.productionready.io/api/articles
+      let globalArticles = null;
+      // let authorizationToken = `token {{${localStorage.getItem('token')}}}`;
+      // console.log(authorizationToken);
+      fetch ('https://conduit.productionready.io/api/articles',{
+      method: 'GET',
+    })
+    .then(response => response.json())
+    .then(data => {
+      globalArticles = data.articles;
+      this.setState({
+        panes: [
+          {
+            menuItem: 'Global Feed',
+            render: () => <Tab.Pane><ArticleList articles={globalArticles}/></Tab.Pane>
+          }
+        ]
+      });
+      console.log(data);
+      // if(!data.error) {
+      //   console.log(data);
+      //   this.props.onLogin();
+      //   localStorage.setItem('token', data.token);
+      //   this.props.history.push('/');
+      // }
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
+      
+    }
   }
-  componentDidMount () {}
   render () {
     const { isLoggedIn } = this.props
     return (
@@ -64,29 +132,7 @@ class Home extends React.Component {
             menu={{ pointing: true }}
             panes={this.state.panes}
           />
-          <aside className='tags-section'>
-            <div className='tags-inner-div'>
-            {
-              Home.COLORLIST.map((elem,index) =>{
-                return <Button basic content={elem.toUpperCase()} key={index}/>
-              })
-            }
-              {/* <Button content='Standard' basic />
-              <Button basic color='red' content='Red' />
-              <Button basic color='orange' content='Orange' />
-              <Button basic color='yellow' content='Yellow' />
-              <Button basic color='olive' content='Olive' />
-              <Button basic color='green' content='Green' />
-              <Button basic color='teal' content='Teal' />
-              <Button basic color='blue' content='Blue' />
-              <Button basic color='violet' content='Violet' />
-              <Button basic color='purple' content='Purple' />
-              <Button basic color='pink' content='Pink' />
-              <Button basic color='brown' content='Brown' />
-              <Button basic color='grey' content='Grey' />
-              <Button basic color='black' content='Black' /> */}
-            </div>
-          </aside>
+          <TagsAside/>
         </section>
       </div>
     )

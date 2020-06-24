@@ -25,27 +25,29 @@ class Register extends React.Component {
     const {username, email, password} = this.state;
     const user = {user:{username, email, password}};
     console.log(JSON.stringify(user));
-    fetch ('https://conduit.productionready.io/api/users',{
-      method: 'POST',
-      headers: {
-        'Content-Type' :'application/json'
-      },
-      body:JSON.stringify(user)
-
-    })
-    .then(response => response.json())
-    .then(data => {
-      // console.log(data);
+    try {
+      let response = await fetch ('https://conduit.productionready.io/api/users/login',{
+        method: 'POST',
+        headers: {
+          'Content-Type':'application/json'
+        },
+        body:JSON.stringify(user)
+  
+      })
+      let data = await response.json();
+      console.log(data);
       if(!data.error) {
-        console.log(data);
-        this.props.onLogin();
-        localStorage.setItem('token', data.token);
-        this.props.history.push('/');
+            console.log(data);
+            this.props.onLogin();
+            localStorage.setItem('token', data.token);
+            this.props.history.push('/');
+          }
+      else{
+        throw(data.error);
       }
-    })
-    .catch((error) => {
-      console.error('Error:', error);
-    });
+    } catch(err) {
+      console.error('Error:', err);
+    }
   }
   render () {
     // console.log(this.props)
