@@ -6,18 +6,17 @@ class HomeTabsWithLoader extends React.Component {
     super(props)
 
     this.state = {
-      isLoading: false,
-      activeIndex: 1,
+      activeIndex: 0,
       globalArticles: null,
       feedArticles: null,
       tagArticles: null
     }
   }
-  handleTabChange = (e, { activeIndex }) => this.state({ activeIndex })
+  handleTabChange = (e, { activeIndex }) => this.setState({ activeIndex })
 
   async componentDidMount () {
-    this.setState({ isLoading: true })
-    const { isLoggedIn, isTagClicked } = this.props
+    // this.setState({ isLoading: true })
+    const { isLoggedIn, isTagClicked, selectedTag } = this.props;
     try {
       const response = await fetch(
         'https://conduit.productionready.io/api/articles',
@@ -54,7 +53,7 @@ class HomeTabsWithLoader extends React.Component {
       try {
         console.log(localStorage.token)
         const response = await fetch(
-          'https://conduit.productionready.io/api/articles?tag=javascript',
+          `https://conduit.productionready.io/api/articles?tag=${selectedTag}`,
           {
             method: 'GET',
             headers: {
@@ -68,8 +67,29 @@ class HomeTabsWithLoader extends React.Component {
         console.error('Error:', err)
       }
     }
-    this.setState({ isLoading: false })
+    // this.setState({ isLoading: false })
     //https://conduit.productionready.io/api/articles?tag=animation
+  }
+  async componentDidUpdate(prevProps) {
+    const { selectedTag } = this.props;
+    if(prevProps.selectedTag !== this.props.selectedTag) {
+      try {
+        console.log(localStorage.token)
+        const response = await fetch(
+          `https://conduit.productionready.io/api/articles?tag=${selectedTag}`,
+          {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          }
+        )
+        const data = await response.json()
+        this.setState({ tagArticles: data.articles })
+      } catch (err) {
+        console.error('Error:', err)
+      }
+    }
   }
   render () {
     let panes
@@ -79,7 +99,8 @@ class HomeTabsWithLoader extends React.Component {
       feedArticles,
       globalArticles,
       tagArticles
-    } = this.state
+    } = this.state;
+    const {selectedTag} = this.props;
     if (this.props.isLoggedIn) {
       if (this.props.isTagClicked) {
         panes = [
@@ -100,7 +121,7 @@ class HomeTabsWithLoader extends React.Component {
             )
           },
           {
-            menuItem: '#Tag',
+            menuItem: `#${selectedTag}`,
             render: () => (
               <Tab.Pane>
                 <ArticleList articles={tagArticles} />

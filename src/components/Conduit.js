@@ -10,30 +10,59 @@ import Profile from './Profile'
 class Conduit extends React.Component {
   constructor (props) {
     super(props)
-    if(localStorage.token){
+    if (localStorage.token) {
       this.state = {
         isLoggedIn: true,
         isTagClicked: false,
-        topTwentyTags:[],
+        topTwentyTags: null,
         currentUser: null,
+        selectedTag:null,
+        homeSelectedTab: 0,
       }
-    }
-    else {
+    } else {
       this.state = {
         isLoggedIn: false,
         isTagClicked: false,
-        topTwentyTags:[],
+        topTwentyTags: null,
         currentUser: null,
+        selectedTag: null,
+        homeSelectedTab:0,
       }
     }
     this.onLogin = this.onLogin.bind(this);
+    this.onTagClicked = this.onTagClicked.bind(this);
   }
-onLogin() {
-  this.setState({isLoggedIn: true});
-}
-onTagClicked(){
-  this.setState({isTagClicked: true})
-}
+  async componentDidMount () {
+    
+    
+      try {
+        const response = await fetch(
+          'https://conduit.productionready.io/api/tags',
+          {
+            method: 'GET'
+          }
+        )
+        const data = await response.json()
+        console.log(data)
+        this.setState({ topTwentyTags: data.tags })
+      } catch (err) {
+        console.error('Error:', err)
+      }
+    
+  }
+  onLogin () {
+    this.setState({ isLoggedIn: true })
+  }
+  onTagClicked (newTag) {
+    
+    this.setState({selectedTag: newTag}, function(){
+      this.setState({ isTagClicked: true }, function(){
+      console.log(this.state.selectedTag);
+    })
+  });
+  
+  }
+  
   render () {
     return (
       <Router>
@@ -73,13 +102,19 @@ onTagClicked(){
           </div>
           <Switch>
             <Route exact path='/'>
-              <Home isLoggedIn={this.state.isLoggedIn} isTagClicked={this.state.isTagClicked} tags={this.state.topTwentyTags}/>
+              <Home
+                isLoggedIn={this.state.isLoggedIn}
+                isTagClicked={this.state.isTagClicked}
+                tags={this.state.topTwentyTags}
+                changeTag={this.onTagClicked}
+                selectedTag={this.state.selectedTag}
+              />
             </Route>
             <Route path='/login'>
-              <Login onLogin={this.onLogin}/>
+              <Login onLogin={this.onLogin} />
             </Route>
             <Route path='/register'>
-              <Register onLogin={this.onLogin}/>
+              <Register onLogin={this.onLogin} />
             </Route>
             <Route path='/editor'>
               <Editor />

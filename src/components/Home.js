@@ -10,18 +10,20 @@ class Home extends React.Component {
 
     this.state = { activeIndex: 0 }
   }
-  
+
   render () {
-    const { isLoggedIn } = this.props
+    console.log('PROSP HOME ', this.props)
+    const { isLoggedIn, tags, isTagClicked, changeTag, selectedTag } = this.props;
     return (
       <div>
         {!isLoggedIn && <HeroSection />}
         <section className='main-section'>
           <HomeTabsWithLoader
-            isLoggedIn={this.props.isLoggedIn}
-            isTagClicked={this.props.isTagClicked}
+            isLoggedIn={isLoggedIn}
+            isTagClicked={isTagClicked}
+            selectedTag = {selectedTag}
           />
-          <AsideTags />
+          <AsideTags tags={tags} changeTag={changeTag} />
         </section>
       </div>
     )

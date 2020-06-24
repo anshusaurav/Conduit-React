@@ -5,11 +5,11 @@ import {SmallArticleLoader} from './Loader'
 class ArticleList extends React.Component{
     Loaders = ()=>{
         let arr = new Array(10).fill(1);
-        return arr.map(elem =><SmallArticleLoader/>)
+        return arr.map((elem,index) =><SmallArticleLoader key={index}/>)
     };
     render(){
         // this.Loaders();
-        const {articles , isLoading} = this.props;
+        const {articles } = this.props;
         return(
         <>
         <Item.Group>
