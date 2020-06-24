@@ -11,11 +11,16 @@ class Conduit extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      isLoggedIn: true,
-      isTagClicked: true,
-      topTwentyTags:[]
+      isLoggedIn: false,
+      isTagClicked: false,
+      topTwentyTags:[],
+      currentUser: null,
     }
+    this.onLogin = this.onLogin.bind(this);
   }
+onLogin() {
+  this.setState({isLoggedIn: true});
+}
   render () {
     return (
       <Router>
@@ -58,10 +63,10 @@ class Conduit extends React.Component {
               <Home isLoggedIn={this.state.isLoggedIn} isTagClicked={this.state.isTagClicked} tags={this.state.topTwentyTags}/>
             </Route>
             <Route path='/login'>
-              <Login />
+              <Login onLogin={this.onLogin}/>
             </Route>
             <Route path='/register'>
-              <Register />
+              <Register onLogin={this.onLogin}/>
             </Route>
             <Route path='/editor'>
               <Editor />

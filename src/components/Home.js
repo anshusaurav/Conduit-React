@@ -50,7 +50,7 @@ class Home extends React.Component {
     this.state.activeIndex = 0
   }
   static get COLORLIST() {
-    return ['red', 'orange', 'yellow', 'green', 'teal', 'blue','violet', 'purple', 'pink','brown'];
+    return ['re d', 'orange', 'yellow', 'green', 'teal', 'blue','violet', 'purple', 'pink','brown'];
   }
   componentDidMount () {}
   render () {
@@ -67,8 +67,8 @@ class Home extends React.Component {
           <aside className='tags-section'>
             <div className='tags-inner-div'>
             {
-              Home.COLORLIST.map(elem =>{
-                return <Button basic  content={elem.toUpperCase()}/>
+              Home.COLORLIST.map((elem,index) =>{
+                return <Button basic content={elem.toUpperCase()} key={index}/>
               })
             }
               {/* <Button content='Standard' basic />

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Tab, Button } from 'semantic-ui-react'
+import { Tab} from 'semantic-ui-react'
 class ProfileArticle extends React.Component {
     constructor(props){
         super(props);
