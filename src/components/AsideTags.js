@@ -11,17 +11,20 @@ class TagsAside extends React.Component{
       }
     onClickTag(event){
       this.props.changeTag(event.target.textContent);
-      // console.log(event.target.textContent);
     }
+    Loaders = ()=>{
+      let arr = new Array(5).fill(1);
+      return arr.map((elem,index) =><TagsLoader key={index}/>)
+  };
     render(){
         const {tags} = this.props;
         return (
             <aside className='tags-section'>
             <div className='tags-inner-div'>
             {
-              !tags?<TagsLoader/>:
+              !tags?this.Loaders():
               tags.map((elem, index) =>{
-                return <Button basic color={TagsAside.COLORLIST[(index%TagsAside.COLORLIST.length)]} content={elem} key={index} onClick={this.onClickTag}/>
+                return <Button className='tag-btn' basic color={TagsAside.COLORLIST[(index%TagsAside.COLORLIST.length)]} content={elem} key={index} onClick={this.onClickTag}/>
               })
             }
               

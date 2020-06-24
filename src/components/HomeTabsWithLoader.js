@@ -15,7 +15,6 @@ class HomeTabsWithLoader extends React.Component {
   handleTabChange = (e, { activeIndex }) => this.setState({ activeIndex })
 
   async componentDidMount () {
-    // this.setState({ isLoading: true })
     const { isLoggedIn, isTagClicked, selectedTag } = this.props;
     try {
       const response = await fetch(
@@ -43,8 +42,9 @@ class HomeTabsWithLoader extends React.Component {
             }
           }
         )
-        const data = await response.json()
-        this.setState({ feedArticles: data.articles })
+        const data = await response.json();
+        if(!data.error)
+          this.setState({ feedArticles: data.articles })
       } catch (err) {
         console.error('Error:', err)
       }
@@ -67,12 +67,12 @@ class HomeTabsWithLoader extends React.Component {
         console.error('Error:', err)
       }
     }
-    // this.setState({ isLoading: false })
-    //https://conduit.productionready.io/api/articles?tag=animation
   }
   async componentDidUpdate(prevProps) {
+   
     const { selectedTag } = this.props;
     if(prevProps.selectedTag !== this.props.selectedTag) {
+      this.setState({tagArticles:null}); 
       try {
         console.log(localStorage.token)
         const response = await fetch(
@@ -100,9 +100,9 @@ class HomeTabsWithLoader extends React.Component {
       globalArticles,
       tagArticles
     } = this.state;
-    const {selectedTag} = this.props;
-    if (this.props.isLoggedIn) {
-      if (this.props.isTagClicked) {
+    const {selectedTag, isLoggedIn, isTagClicked} = this.props;
+    if (isLoggedIn) {
+      if (isTagClicked) {
         panes = [
           {
             menuItem: 'Your Feed',
@@ -150,6 +150,28 @@ class HomeTabsWithLoader extends React.Component {
         ]
       }
     } else {
+      if (isTagClicked) {
+        panes = [
+          
+          {
+            menuItem: 'Global Feed',
+            render: () => (
+              <Tab.Pane>
+                <ArticleList articles={globalArticles} />
+              </Tab.Pane>
+            )
+          },
+          {
+            menuItem: `#${selectedTag}`,
+            render: () => (
+              <Tab.Pane>
+                <ArticleList articles={tagArticles} />
+              </Tab.Pane>
+            )
+          },
+        ]
+      }
+      else{
       panes = [
         {
           menuItem: 'Global Feed',
@@ -160,6 +182,7 @@ class HomeTabsWithLoader extends React.Component {
           )
         }
       ]
+    }
     }
     return (
       

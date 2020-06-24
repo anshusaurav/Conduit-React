@@ -3,12 +3,12 @@ import { Input, Button, Form } from 'semantic-ui-react'
 import { withRouter } from 'react-router-dom'
 // import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
 class Login extends React.Component {
-
   constructor (props) {
     super(props)
     this.state = { email: '', password: '' }
     this.onChange = this.onChange.bind(this)
     this.onSubmit = this.onSubmit.bind(this)
+    this.onClickHandler = this.onClickHandler.bind(this)
   }
 
   onChange (event) {
@@ -19,7 +19,10 @@ class Login extends React.Component {
       this.setState({ password: event.target.value })
     }
   }
-
+  onClickHandler (event) {
+    event.preventDefault()
+    this.props.history.push('/register')
+  }
   async onSubmit (event) {
     event.preventDefault()
     const { email, password } = this.state
@@ -47,8 +50,7 @@ class Login extends React.Component {
       } else {
         throw data.error
       }
-    } 
-    catch (err) {
+    } catch (err) {
       console.error('Error:', err)
     }
   }
@@ -56,7 +58,17 @@ class Login extends React.Component {
   render () {
     return (
       <div className='login-div'>
-        <h2>Sign In</h2>
+        <div className='login-div-header'>
+          <h2>Sign In</h2>
+          <div>
+            <Button
+              positive
+              onClick={this.onClickHandler}
+            >
+              Have an account?
+            </Button>
+          </div>
+        </div>
         <Form className='login-input-div' onSubmit={this.onSubmit}>
           <Input
             size='large'

@@ -67,9 +67,16 @@ table {
         align-content:center;
     }
 }
-.login-div{
+.login-div{ 
     width: 400px;
     margin: 0 auto;
+    .login-div-header{
+        display: grid;
+        grid-template-columns: 1fr;
+        justify-items: center;
+        margin-bottom: 1rem;
+       
+    }
     .login-input-div{
         display: grid;
         grid-template-columns: 1fr;
@@ -103,10 +110,17 @@ table {
 }
 
 .tags-section{
+    background-color: #f3f3f3;
+    // height:400px;
+    padding: 0.5rem;
+    // display: flex;
+    // justify-content: center;
+    // align-items: center;
+    // margin: 0 auto;
     .tags-inner-div{
-        Button{
+       .tag-btn{
             margin-bottom: 0.25rem;
-            border-radius: 18px;
+            border-radius: 8px;
         }
         
     }

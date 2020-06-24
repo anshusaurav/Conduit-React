@@ -7,6 +7,7 @@ class Register extends React.Component {
     this.state= {username:'', email:'', password:''};
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+    this.onClickHandler = this.onClickHandler.bind(this);
   }
   onChange(event) {
     const tName = event.target.name;
@@ -19,6 +20,10 @@ class Register extends React.Component {
     else if(tName === 'password'){
       this.setState({password: event.target.value})
     }
+  }
+  onClickHandler(event){
+    event.preventDefault();
+    this.props.history.push('/login');
   }
   async onSubmit(event) {
     event.preventDefault();
@@ -53,7 +58,18 @@ class Register extends React.Component {
     // console.log(this.props)
     return (
       <div className='login-div'>
-        <h2>Sign Up</h2>
+        <div className='login-div-header'>
+          <h2>Sign Up</h2>
+          <div>
+            <Button
+              positive
+              onClick={this.onClickHandler}
+            >
+              Need an account?
+            </Button>
+          </div>
+        </div>
+        
         <Form className='login-input-div' onSubmit = {this.onSubmit}>
           <Input size='large' name='username' type='text' placeholder='name' value={this.state.name} onChange={this.onChange}/>
           <Input size='large' name='email' type='email' placeholder='email' value={this.state.email} onChange={this.onChange}/>
