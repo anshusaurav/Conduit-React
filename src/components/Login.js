@@ -12,17 +12,24 @@ class Login extends React.Component {
   }
 
   onChange (event) {
-    const tName = event.target.name
-    if (tName === 'email') {
-      this.setState({ email: event.target.value })
-    } else if (tName === 'password') {
-      this.setState({ password: event.target.value })
+    const { name, value } = event.target.name
+    switch (name) {
+      case 'email':
+        this.setState({ email: value })
+        break
+      case 'password':
+        this.setState({ password: value })
+        break
+      default:
+        console.log('We are out of targets.')
     }
   }
+
   onClickHandler (event) {
     event.preventDefault()
     this.props.history.push('/register')
   }
+
   async onSubmit (event) {
     event.preventDefault()
     const { email, password } = this.state
@@ -61,10 +68,7 @@ class Login extends React.Component {
         <div className='login-div-header'>
           <h2>Sign In</h2>
           <div>
-            <Button
-              positive
-              onClick={this.onClickHandler}
-            >
+            <Button positive onClick={this.onClickHandler}>
               Have an account?
             </Button>
           </div>

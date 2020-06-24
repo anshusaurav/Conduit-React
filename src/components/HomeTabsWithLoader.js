@@ -22,16 +22,14 @@ class HomeTabsWithLoader extends React.Component {
         {
           method: 'GET'
         }
-      )
-      const data = await response.json()
-      this.setState({ globalArticles: data.articles })
-      console.log(this.state.globalArticles)
+      );
+      const data = await response.json();
+      this.setState({ globalArticles: data.articles });
     } catch (err) {
-      console.error('Error:', err)
+      console.error('Error:', err);
     }
     if (isLoggedIn) {
       try {
-        console.log(localStorage.token)
         const response = await fetch(
           'https://conduit.productionready.io/api/articles/feed',
           {
@@ -41,7 +39,7 @@ class HomeTabsWithLoader extends React.Component {
               Authorization: `Token ${localStorage.token}`
             }
           }
-        )
+        );
         const data = await response.json();
         if(!data.error)
           this.setState({ feedArticles: data.articles })
@@ -51,7 +49,7 @@ class HomeTabsWithLoader extends React.Component {
     }
     if (isTagClicked) {
       try {
-        console.log(localStorage.token)
+        // console.log(localStorage.token)
         const response = await fetch(
           `https://conduit.productionready.io/api/articles?tag=${selectedTag}`,
           {

@@ -1,6 +1,6 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
-import { Form, Button, TextArea } from 'semantic-ui-react'
+import { Form, Button, TextArea, Input } from 'semantic-ui-react'
 class Editor extends React.Component {
   constructor (props) {
     super(props)
@@ -14,8 +14,9 @@ class Editor extends React.Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
   onChange (event) {
-    const { value, tName } = event.target
-    switch (tName) {
+    const { value, name } = event.target;
+    console.log(value, name);
+    switch (name) {
       case 'title':
         this.setState({ title: value })
         break
@@ -37,7 +38,7 @@ class Editor extends React.Component {
     event.preventDefault()
     const { title, description, body, tags } = this.state;
     const { token } = localStorage;
-    console.log(token);
+    // console.log(token);
     const article = { article: { title, description, body, tags } }
 
     try {
@@ -65,14 +66,14 @@ class Editor extends React.Component {
     return (
       <Form className='editor-form' onSubmit={this.onSubmit}>
         <Form.Field>
-          <input
+          <Input
             placeholder='Article Title'
             name='title'
             onChange={this.onChange}
           />
         </Form.Field>
         <Form.Field>
-          <input
+          <Input
             placeholder="What's this article about?"
             name='description'
             onChange={this.onChange}
@@ -86,7 +87,7 @@ class Editor extends React.Component {
           />
         </Form.Field>
         <Form.Field>
-          <input
+          <Input
             placeholder='Enter Tags'
             name='tags'
             onChange={this.onChange}

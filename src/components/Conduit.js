@@ -43,7 +43,7 @@ class Conduit extends React.Component {
           }
         )
         const data = await response.json()
-        console.log(data)
+        // console.log(data)
         this.setState({ topTwentyTags: data.tags })
       } catch (err) {
         console.error('Error:', err)
