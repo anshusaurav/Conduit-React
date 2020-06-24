@@ -3,7 +3,7 @@ import React from 'react'
 import HeroSection from './HeroSection'
 import AsideTags from './AsideTags'
 
-import HomeTabs from './HomeTabs'
+import HomeTabsWithLoader from './HomeTabsWithLoader'
 class Home extends React.Component {
   constructor (props) {
     super(props)
@@ -17,7 +17,7 @@ class Home extends React.Component {
       <div>
         {!isLoggedIn && <HeroSection />}
         <section className='main-section'>
-          <HomeTabs
+          <HomeTabsWithLoader
             isLoggedIn={this.props.isLoggedIn}
             isTagClicked={this.props.isTagClicked}
           />
