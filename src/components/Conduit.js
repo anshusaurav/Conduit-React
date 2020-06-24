@@ -10,16 +10,29 @@ import Profile from './Profile'
 class Conduit extends React.Component {
   constructor (props) {
     super(props)
-    this.state = {
-      isLoggedIn: false,
-      isTagClicked: false,
-      topTwentyTags:[],
-      currentUser: null,
+    if(localStorage.token){
+      this.state = {
+        isLoggedIn: true,
+        isTagClicked: false,
+        topTwentyTags:[],
+        currentUser: null,
+      }
+    }
+    else {
+      this.state = {
+        isLoggedIn: false,
+        isTagClicked: false,
+        topTwentyTags:[],
+        currentUser: null,
+      }
     }
     this.onLogin = this.onLogin.bind(this);
   }
 onLogin() {
   this.setState({isLoggedIn: true});
+}
+onTagClicked(){
+  this.setState({isTagClicked: true})
 }
   render () {
     return (

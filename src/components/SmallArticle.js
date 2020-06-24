@@ -1,6 +1,7 @@
 import React from 'react';
 import ArticleAuthor from './ArticleAuthor'
 import ArticlePreview from './ArticlePreview'
+import {SmallArticleLoader} from './Loader'
 class SmallArticle extends React.Component{
     
     render() {
