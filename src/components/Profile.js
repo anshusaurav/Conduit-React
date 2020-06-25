@@ -2,7 +2,7 @@ import React from 'react'
 import ProfileHero from './ProfileHero'
 import { withRouter } from 'react-router-dom'
 import ProfileArticles from './ProfileArticles'
-import { FullPageFormLoader, FullPageNormalLoader } from './Loader'
+import { FullPageNormalLoader } from './Loader'
 class Profile extends React.Component {
   constructor (props) {
     super(props)
@@ -49,7 +49,7 @@ class Profile extends React.Component {
     }
   }
   async componentDidUpdate (prevProps, prevState) {
-    if (this.state.isUpdate !== prevState.isUpdate || this.props.history.location.pathname !== prevProps.history.location.pathname) {
+    if (this.state.isUpdate !== prevState.isUpdate) {
       const path = this.props.history.location.pathname
       const usedPath = path.substring(1)
       const index = usedPath.indexOf('/')
@@ -76,7 +76,6 @@ class Profile extends React.Component {
           })
         }
         let data = await response.json()
-        // console.log(data)
         if (!data.error) {
           this.setState({ profile: data.profile })
         }
@@ -110,6 +109,3 @@ class Profile extends React.Component {
   }
 }
 export default withRouter(Profile)
-
-//https://conduit.productionready.io/api/articles?author=Chinnodu&limit=5&offset=0
-//https://conduit.productionready.io/api/articles?favorited=Chinnodu&limit=5&offset=0

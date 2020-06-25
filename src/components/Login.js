@@ -1,11 +1,11 @@
 import React from 'react'
-import { Input, Button, Form } from 'semantic-ui-react'
+import { Input, Button, Form, Message } from 'semantic-ui-react'
 import { withRouter } from 'react-router-dom'
 // import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
 class Login extends React.Component {
   constructor (props) {
     super(props)
-    this.state = { email: '', password: '' }
+    this.state = { email: '', password: '', errorMsgs: null }
     this.onChange = this.onChange.bind(this)
     this.onSubmit = this.onSubmit.bind(this)
     this.onClickHandler = this.onClickHandler.bind(this)
@@ -47,22 +47,26 @@ class Login extends React.Component {
           body: JSON.stringify(user)
         }
       )
-      let data = await response.json()
-      console.log(data)
-      if (!data.error) {
-        console.log(data.user);
-        this.props.onLogin();
+      let data = await response.json();
+      if (!data.errors) {
+        this.props.onLogin()
         localStorage.setItem('token', data.user.token)
         this.props.history.push('/')
       } else {
-        throw data.error
+        const errors = []
+        for (const [key, value] of Object.entries(data.errors)) {
+          errors.push(`${key} ${value}`)
+        }
+        this.setState({ errorMsgs: errors })
       }
     } catch (err) {
+      this.setState({ errorMsg: err })
       console.error('Error:', err)
     }
   }
 
   render () {
+    const { errorMsgs } = this.state;
     return (
       <div className='login-div'>
         <div className='login-div-header'>
@@ -88,6 +92,8 @@ class Login extends React.Component {
             placeholder='password'
             onChange={this.onChange}
           />
+          {errorMsgs &&
+            errorMsgs.map((msg,index) => <Message key={index} color='red'>{msg}</Message>)}
           <div className='login-btn-div'>
             <Button secondary>Sign In</Button>
             {/* <Button primary>Reset</Button> */}

@@ -16,16 +16,29 @@ class IndividualArticle extends React.Component {
     const path = this.props.history.location.pathname
     const { token } = localStorage
     try {
-      let response = await fetch(
-        `https://conduit.productionready.io/api${path}`,
-        {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Token ${token}`
+      let response
+      if (token) {
+        response = await fetch(
+          `https://conduit.productionready.io/api${path}`,
+          {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Token ${token}`
+            }
           }
-        }
-      )
+        )
+      } else {
+        response = await fetch(
+          `https://conduit.productionready.io/api${path}`,
+          {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          }
+        )
+      }
       let data = await response.json()
       if (!data.error) {
         this.setState({ article: data.article })
@@ -34,16 +47,29 @@ class IndividualArticle extends React.Component {
       console.error('Error:', err)
     }
     try {
-      let response = await fetch(
-        `https://conduit.productionready.io/api${path}/comments`,
-        {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Token ${token}`
+      let response
+      if (token) {
+        response = await fetch(
+          `https://conduit.productionready.io/api${path}/comments`,
+          {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Token ${token}`
+            }
           }
-        }
-      )
+        )
+      } else {
+        response = await fetch(
+          `https://conduit.productionready.io/api${path}/comments`,
+          {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          }
+        )
+      }
       let data = await response.json()
       if (!data.error) {
         this.setState({ comments: data.comments })
@@ -53,7 +79,6 @@ class IndividualArticle extends React.Component {
     }
   }
   handleUpdate (boolean) {
-    console.log('HAndle comment update called with ', boolean)
     this.setState({ isUpdated: boolean })
   }
   handleDelete () {
@@ -65,16 +90,29 @@ class IndividualArticle extends React.Component {
       try {
         const path = this.props.history.location.pathname
         const { token } = localStorage
-        let response = await fetch(
-          `https://conduit.productionready.io/api${path}/comments`,
-          {
-            method: 'GET',
-            headers: {
-              'Content-Type': 'application/json',
-              Authorization: `Token ${token}`
+        let response
+        if (token) {
+          response = await fetch(
+            `https://conduit.productionready.io/api${path}/comments`,
+            {
+              method: 'GET',
+              headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Token ${token}`
+              }
             }
-          }
-        )
+          )
+        } else {
+          response = await fetch(
+            `https://conduit.productionready.io/api${path}/comments`,
+            {
+              method: 'GET',
+              headers: {
+                'Content-Type': 'application/json'
+              }
+            }
+          )
+        }
         let data = await response.json()
         if (!data.error) {
           this.setState({ comments: data.comments })
