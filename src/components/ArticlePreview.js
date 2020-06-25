@@ -12,10 +12,10 @@ class ArticlePreview extends React.Component {
         <Link to={`/articles/${slug}`}>
         <Item.Content>
         
-          <Item.Header as='a'>{title}</Item.Header>
-          <Item.Meta className='block' as='a'>{description}</Item.Meta>
+          <Item.Header >{title}</Item.Header>
+          <Item.Meta >{description}</Item.Meta>
           
-          <Item.Extra as='a'>ReadMore</Item.Extra>
+          <Item.Extra>ReadMore</Item.Extra>
           <Item.Extra>{tags}</Item.Extra>
         </Item.Content>
         </Link>

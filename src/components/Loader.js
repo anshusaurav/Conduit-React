@@ -41,3 +41,14 @@ export function FullPageFormLoader(){
   </div>
   );
 }
+export function FullPageNormalLoader(){
+  return (
+    <Segment>
+    <Dimmer active inverted>
+      <Loader size='large'>Loading</Loader>
+    </Dimmer>
+
+    <Image src='https://react.semantic-ui.com/images/wireframe/paragraph.png' />
+  </Segment>
+  );
+}

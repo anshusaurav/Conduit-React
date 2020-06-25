@@ -261,22 +261,27 @@ table {
     color: white;
   }
 }
-.article-details-div{
-    margin: 0.5rem;
-    .item{
-        margin-bottom: 0.5rem;
-        .content{
-            .description{
-            font-size: 20px;
-            margin: 0.5rem;
-            }
-        }
+.article-details-div {
+  margin: 0.5rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid #f3f3f3;
+  .item {
+    margin-bottom: 0.5rem;
+    .content {
+      .description {
+        font-size: 20px;
+        margin: 1.25rem 0.5rem;
+      }
     }
+  }
 }
 .profile-div {
   .profile-articles {
     margin-top: 1.5rem;
   }
+}
+.article-div {
+  margin-top: 1.5rem;
 }
 .block {
   display: block;
@@ -291,4 +296,14 @@ body .ui.cards > .card {
 
 .small-article {
   border-bottom: 1px solid #f3f3f3;
+}
+
+.article-complete-div {
+  .ui.comments {
+    width: 60%;
+    margin: 0 auto;
+    
+    padding-bottom: 1rem;
+    padding-top: 1rem;
+  }
 }

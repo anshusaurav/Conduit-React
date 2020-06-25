@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { Item, Card, Image } from 'semantic-ui-react'
+import { Card, Image } from 'semantic-ui-react'
 class ArticleAuthor extends React.Component {
   render () {
     // const article = this.props.article;

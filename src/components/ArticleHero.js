@@ -13,7 +13,7 @@ class ArticleHero extends React.Component {
           <div>
             <ArticleAuthor article={this.props.article} />
           </div>
-          {currentUser.username === article.author.username && (
+          {currentUser && currentUser.username === article.author.username && (
             <div className='article-hero-btn-grp'>
               <div>
                 <Button
