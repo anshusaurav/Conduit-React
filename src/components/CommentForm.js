@@ -8,7 +8,6 @@ class CommentForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this)
   }
   handleChange (event) {
-    console.log(event.target.value)
     if (event.target.name === 'body') {
       this.setState({ body: event.target.value })
     }

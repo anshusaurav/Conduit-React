@@ -246,7 +246,7 @@ class Conduit extends React.Component {
               <Settings onLogout={this.onLogout} onUpdate={this.onUpdate} />
             </Route>
             <Route path='/profiles/:username'>
-              <Profile />
+              <Profile  currentUser={this.state.currentUser} />
             </Route>
             <Route path='/articles/:slug'>
               <IndividualArticle currentUser={this.state.currentUser} />

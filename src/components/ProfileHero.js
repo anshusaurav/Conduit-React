@@ -1,17 +1,40 @@
-import React from 'react';
-import {Button} from 'semantic-ui-react'
-class ProfileHero extends React.Component{
-    render() {
-        return (
-            <section className='profile-hero-section'>
-                <div className='profile-picture-div'>
-                <img src='https://avatars1.githubusercontent.com/u/11404667?s=460&u=869c309379e8be4b2ce089693e5bcdaa37f602cf&v=4' alt=''></img>
-                </div>
-                <div className='profile-settings-btn-div'>
-                    <Button content='Edit Profile Settings' icon='setting' labelPosition='left' />
-                </div>
-            </section>
-        );
-    }
+import React from 'react'
+import { Button } from 'semantic-ui-react'
+class ProfileHero extends React.Component {
+  constructor (props) {
+    super(props)
+  }
+  render () {
+    const { username, bio, image, following } = this.props.profile;
+    const { currentUser } = this.props
+    return (
+      <section className='profile-hero-section'>
+        <div className='profile-picture-div'>
+          <img src={image} alt=''></img>
+        </div>
+        <h3>{username}</h3>
+        {bio && <h4>{bio}</h4>}
+        {currentUser && currentUser.username === username && 
+          <div className='profile-settings-btn-div'>
+            <Button
+              content='Edit Profile Settings'
+              icon='setting'
+              labelPosition='left'
+            />
+          </div>
+        }
+        {currentUser && currentUser.username !== username && following && 
+          <div className='profile-settings-btn-div'>
+            <Button content='Unfollow' icon='remove' labelPosition='left' />
+          </div>
+        }
+        {currentUser && currentUser.username !== username && !following && 
+          <div className='profile-settings-btn-div'>
+            <Button content='Follow' icon='add' labelPosition='left' />
+          </div>
+        }
+      </section>
+    )
+  }
 }
-export default ProfileHero;
+export default ProfileHero
