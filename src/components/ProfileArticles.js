@@ -29,28 +29,32 @@ class ProfileArticle extends React.Component {
     }
     handleTabChange = (e, { activeIndex }) => this.setState({ activeIndex })
     async componentDidMount(){
+      // console.log
+      const {username} = this.props.profile;
       try {
-        const url = `https://conduit.productionready.io/api/articles?author=Chinnodu`;
+        const url = `https://conduit.productionready.io/api/articles?author=${username}`;
         const response = await fetch(
-          'https://conduit.productionready.io/api/articles',
+          url,
           {
             method: 'GET'
           }
         );
         const data = await response.json();
+        console.log('sarticles: ',data)
         this.setState({ sArticles: data.articles });
       } catch (err) {
         console.error('Error:', err);
       }
       try {
-        const url = `https://conduit.productionready.io/api/articles?favorited=Chinnodu`;
+        const url = `https://conduit.productionready.io/api/articles?favorited=${username}`;
         const response = await fetch(
-          'https://conduit.productionready.io/api/articles',
+          url,
           {
             method: 'GET'
           }
         );
         const data = await response.json();
+        console.log('farticles: ',data);
         this.setState({ fArticles: data.articles });
       } catch (err) {
         console.error('Error:', err);
@@ -80,9 +84,10 @@ class ProfileArticle extends React.Component {
         return (
             <div className='profile-articles'>
             <Tab
-            className='tabs-menu'
-            menu={{ pointing: true }}
-            panes={this.state.panes}
+            activeIndex={activeIndex}
+        onTabChange={this.handleTabChange}
+        menu={{ pointing: true }}
+        panes={panes}
           />
           </div>
         );

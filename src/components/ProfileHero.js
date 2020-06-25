@@ -20,7 +20,7 @@ class ProfileHero extends React.Component {
           }
         })
         let data = await response.json()
-        console.log('res ', data)
+        // console.log('res ', data)
         if (!data.error) {
           this.props.handleUpdate()
         }
@@ -38,7 +38,7 @@ class ProfileHero extends React.Component {
               }
             })
             let data = await response.json()
-            console.log('res ', data)
+            // console.log('res ', data)
             if (!data.error) {
               this.props.handleUpdate()
             }
