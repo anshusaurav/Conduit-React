@@ -15,7 +15,7 @@ class CommentList extends React.Component {
             return <CommentSmall comment={comment} />
           })
         )}
-        <CommentForm slug={slug} handleCommentUpdate ={this.props.handleCommentUpdate}/>
+        <CommentForm slug={slug} handleUpdate ={this.props.handleUpdate}/>
       </Comment.Group>
     )
   }

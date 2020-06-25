@@ -15,7 +15,7 @@ class CommentForm extends React.Component {
   }
   async handleSubmit (event) {
     event.preventDefault()
-    const { body } = this.state;
+    const { body } = this.state
     const { token } = localStorage
     const comment = { comment: { body } }
     const { slug } = this.props
@@ -29,11 +29,10 @@ class CommentForm extends React.Component {
         },
         body: JSON.stringify(comment)
       })
-      let data = await response.json()
-      console.log('res ', data)
+      let data = await response.json();
       if (!data.error) {
-        this.setState({ body: '' })
-        this.props.handleCommentUpdate(true)
+        this.setState({ body: '' });
+        this.props.handleUpdate(true);
       }
     } catch (err) {
       console.error('Error:', err)
