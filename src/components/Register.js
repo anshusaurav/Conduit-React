@@ -1,17 +1,17 @@
 import React from 'react'
-import { Input, Button, Form, Message  } from 'semantic-ui-react'
+import { Input, Button, Form, Message } from 'semantic-ui-react'
 import { withRouter } from 'react-router-dom'
 class Register extends React.Component {
   constructor (props) {
     super(props)
-    this.state = { username: '', email: '', password: '',errorMsgs: null }
+    this.state = { username: '', email: '', password: '', errorMsgs: null }
     this.onChange = this.onChange.bind(this)
     this.onSubmit = this.onSubmit.bind(this)
     this.onClickHandler = this.onClickHandler.bind(this)
   }
 
   onChange (event) {
-    const { name, value } = event.target;
+    const { name, value } = event.target
     switch (name) {
       case 'username':
         this.setState({ username: value })
@@ -31,7 +31,7 @@ class Register extends React.Component {
     event.preventDefault()
     this.props.history.push('/login')
   }
-  
+
   async onSubmit (event) {
     event.preventDefault()
     const { username, email, password } = this.state
@@ -48,11 +48,8 @@ class Register extends React.Component {
           body: JSON.stringify(user)
         }
       )
-      let data = await response.json()
-      console.log(data);
+      let data = await response.json();
       if (!data.errors) {
-        // console.log(data);
-        // localStorage.setItem('token', data.token)
         this.props.history.push('/login')
       } else {
         const errors = []
@@ -66,7 +63,7 @@ class Register extends React.Component {
     }
   }
   render () {
-    const { errorMsgs } = this.state;
+    const { errorMsgs } = this.state
     return (
       <div className='login-div'>
         <div className='login-div-header'>
@@ -104,10 +101,13 @@ class Register extends React.Component {
             onChange={this.onChange}
           />
           {errorMsgs &&
-            errorMsgs.map((msg,index) => <Message key={index} color='red'>{msg}</Message>)}
+            errorMsgs.map((msg, index) => (
+              <Message key={index} color='red'>
+                {msg}
+              </Message>
+            ))}
           <div className='login-btn-div'>
             <Button primary>Sign Up</Button>
-            {/* <Button secondary>Reset</Button> */}
           </div>
         </Form>
       </div>

@@ -1,7 +1,7 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
 import { FullPageFormLoader } from './Loader'
-import { Form, Button, TextArea, Input } from 'semantic-ui-react'
+import { Form, Button, TextArea, Input,Message } from 'semantic-ui-react'
 class Settings extends React.Component {
   constructor (props) {
     super(props)
@@ -10,14 +10,15 @@ class Settings extends React.Component {
       username: '',
       bio: '',
       image: '',
-      password: ''
+      password: '',
+      errorMsgs:null
     }
     this.onChange = this.onChange.bind(this)
     this.onSubmit = this.onSubmit.bind(this)
     this.onLogout = this.onLogout.bind(this)
   }
   onChange (event) {
-    const { value, name } = event.target
+    const { value, name } = event.target;
     console.log(value, name)
     switch (name) {
       case 'email':
@@ -63,11 +64,16 @@ class Settings extends React.Component {
           }
         )
         let data = await response.json();
-        // console.log(data);
-        if (!data.error) {
+        console.log(data);
+        if (!data.errors) {
           this.props.onUpdate(true);
-          this.props.history.push('/');
           
+        }else {
+          const errors = []
+          for (const [key, value] of Object.entries(data.errors)) {
+            errors.push(`${key} ${value}`)
+          }
+          this.setState({ errorMsgs: errors });
         }
       } catch (err) {
         console.error('Error:', err)
@@ -111,7 +117,7 @@ class Settings extends React.Component {
     this.props.onLogout()
   }
   render () {
-    const { image, bio, username, email } = this.state
+    const { image, bio, username, email, errorMsgs } = this.state;
 
     return (
       <>
@@ -149,7 +155,6 @@ class Settings extends React.Component {
                 <Input
                   placeholder='Email'
                   name='email'
-                  type='email'
                   value={email}
                   onChange={this.onChange}
                 />
@@ -162,7 +167,9 @@ class Settings extends React.Component {
                   onChange={this.onChange}
                 />
               </Form.Field>
-              <Button type='submit'>Update Settings</Button>
+              {errorMsgs &&
+            errorMsgs.map((msg,index) => <Message key={index} color='red'>{msg}</Message>)}
+              <Button type='submit' onClick={this.onSubmit}>Update Settings</Button>
             </Form>
             <div className='settings-form'>
               <Button onClick={this.onLogout}>Logout</Button>

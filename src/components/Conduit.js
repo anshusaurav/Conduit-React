@@ -129,7 +129,7 @@ class Conduit extends React.Component {
     return (
       <Router>
         <div className='container'>
-          <div className='header'>
+          <div className='header-nav'>
             <h1>
               <Link to='/'>conduit</Link>
             </h1>
@@ -139,7 +139,8 @@ class Conduit extends React.Component {
                   <NavLink
                     activeStyle={{
                       fontWeight: 'bold',
-                      color: 'rgba(0,0,0,.87)'
+                      background: 'rgba(0,0,0,.87)',
+                      padding: '2px 4px'
                     }}
                     to='/'
                   >
@@ -150,7 +151,8 @@ class Conduit extends React.Component {
                   <NavLink
                     activeStyle={{
                       fontWeight: 'bold',
-                      color: 'rgba(0,0,0,.87)'
+                      background: 'rgba(0,0,0,.87)',
+                      padding: '2px 4px'
                     }}
                     to='/login'
                   >
@@ -161,7 +163,8 @@ class Conduit extends React.Component {
                   <NavLink
                     activeStyle={{
                       fontWeight: 'bold',
-                      color: 'rgba(0,0,0,.87)'
+                      background: 'rgba(0,0,0,.87)',
+                      padding: '2px 4px'
                     }}
                     to='/register'
                   >
@@ -175,7 +178,8 @@ class Conduit extends React.Component {
                   <NavLink
                     activeStyle={{
                       fontWeight: 'bold',
-                      color: 'rgba(0,0,0,.87)'
+                      background: 'rgba(0,0,0,.87)',
+                      padding: '2px 4px'
                     }}
                     to='/'
                   >
@@ -187,7 +191,8 @@ class Conduit extends React.Component {
                   <NavLink
                     activeStyle={{
                       fontWeight: 'bold',
-                      color: 'rgba(0,0,0,.87)'
+                      background: 'rgba(0,0,0,.87)',
+                      padding: '2px 4px'
                     }}
                     to='/editor'
                   >
@@ -199,7 +204,8 @@ class Conduit extends React.Component {
                   <NavLink
                     activeStyle={{
                       fontWeight: 'bold',
-                      color: 'rgba(0,0,0,.87)'
+                      background: 'rgba(0,0,0,.87)',
+                      padding: '2px 4px'
                     }}
                     to='/settings'
                   >
@@ -211,7 +217,8 @@ class Conduit extends React.Component {
                   <NavLink
                     activeStyle={{
                       fontWeight: 'bold',
-                      color: 'rgba(0,0,0,.87)'
+                      background: 'rgba(0,0,0,.87)',
+                      padding: '2px 4px'
                     }}
                     to={`/profiles/${this.state.currentUser.username}`}
                   >

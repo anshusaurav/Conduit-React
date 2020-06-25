@@ -2,7 +2,7 @@
    v2.0 | 20110126
    License: none (public domain)
 */
-
+@import url('https://fonts.googleapis.com/css2?family=Blinker:wght@400;600;700;800&display=swap');
 html,
 body,
 div,
@@ -135,7 +135,7 @@ table {
   width: 1200px;
   margin: 0 auto;
 }
-.header {
+.header-nav {
   display: flex;
 
   justify-content: space-between;
@@ -277,6 +277,8 @@ table {
   .item {
     margin-bottom: 0.5rem;
     .content {
+      padding-top: 0;
+      padding-bottom: 0;
       .description {
         font-size: 20px;
         margin: 1.25rem 0.5rem;
@@ -305,6 +307,7 @@ body .ui.cards > .card {
 
 .small-article {
   border-bottom: 1px solid #f3f3f3;
+  padding-bottom: 1.25rem;
 }
 
 .article-complete-div {
@@ -315,4 +318,31 @@ body .ui.cards > .card {
     padding-bottom: 1rem;
     padding-top: 1rem;
   }
+}
+.items{
+
+.links-react{
+  .content{
+    padding: 0 1rem;
+    .header{
+      color: rgb(8, 9, 10);
+      font-size: 24px;
+      font-weight: 700;
+      text-transform: capitalize;
+      line-height: 2.0;
+      font-family: 'Blinker', sans-serif;
+      letter-spacing: normal;
+    }
+    .description{
+      color: rgb(8, 9, 10);
+      font-size: 18px;
+      font-weight: 600;
+      line-height: 1.75;
+      text-transform: capitalize;
+      font-family: 'Blinker', sans-serif;
+      letter-spacing: normal;
+    }
+  }
+  
+}
 }

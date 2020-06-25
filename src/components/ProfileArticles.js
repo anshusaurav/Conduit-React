@@ -2,23 +2,6 @@ import React from 'react'
 import { Tab} from 'semantic-ui-react'
 import ArticleList from './ArticleList'
 class ProfileArticle extends React.Component {
-    
-  /*constructor(props){
-        super(props);
-        this.state = {
-            panes: [
-              {
-                menuItem: 'My Articles',
-                render: () => <Tab.Pane>Tab 1 Content</Tab.Pane>
-              },
-              {
-                menuItem: 'Favorited Articles',
-                render: () => <Tab.Pane>Tab 2 Content</Tab.Pane>
-              }
-              
-            ]
-          }
-    }*/
     constructor(props){
       super(props);
       this.state = {

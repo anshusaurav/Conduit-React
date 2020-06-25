@@ -57,7 +57,7 @@ class Login extends React.Component {
         for (const [key, value] of Object.entries(data.errors)) {
           errors.push(`${key} ${value}`)
         }
-        this.setState({ errorMsgs: errors })
+        this.setState({ errorMsgs: errors });
       }
     } catch (err) {
       this.setState({ errorMsg: err })
@@ -96,7 +96,7 @@ class Login extends React.Component {
             errorMsgs.map((msg,index) => <Message key={index} color='red'>{msg}</Message>)}
           <div className='login-btn-div'>
             <Button secondary>Sign In</Button>
-            {/* <Button primary>Reset</Button> */}
+           
           </div>
         </Form>
       </div>
