@@ -54,9 +54,9 @@ class Editor extends React.Component {
         }
       )
       let data = await response.json();
-      console.log(data);
+      // console.log(data);
       if (!data.error) {
-        this.props.history.push('/')
+        this.props.history.push('/');
       }
     } catch (err) {
       console.error('Error:', err)
@@ -64,6 +64,8 @@ class Editor extends React.Component {
   }
   render () {
     return (
+      <>
+      <h2>Write new article</h2>
       <Form className='editor-form' onSubmit={this.onSubmit}>
         <Form.Field>
           <Input
@@ -95,6 +97,7 @@ class Editor extends React.Component {
         </Form.Field>
         <Button type='submit'>Publish</Button>
       </Form>
+      </>
     )
   }
 }

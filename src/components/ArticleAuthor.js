@@ -1,5 +1,6 @@
-import React from 'react'
-import { Item } from 'semantic-ui-react'
+import React from 'react';
+import {Link} from 'react-router-dom'
+import { Item } from 'semantic-ui-react';
 class ArticleAuthor extends React.Component {
   render () {
     // const article = this.props.article;
@@ -7,6 +8,7 @@ class ArticleAuthor extends React.Component {
     const {username, image} = this.props.article.author;
     return (
       <Item>
+        <Link to={`/profiles/${username}`}>
         <Item.Image
           size='tiny'
           src={image||'https://static.productionready.io/images/smiley-cyrus.jpg'}
@@ -17,6 +19,7 @@ class ArticleAuthor extends React.Component {
           <Item.Meta>{updatedAt}</Item.Meta>
           
         </Item.Content>
+        </Link>
       </Item>
     )
   }

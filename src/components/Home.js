@@ -12,7 +12,6 @@ class Home extends React.Component {
   }
 
   render () {
-    // console.log('PROSP HOME ', this.props)
     const { isLoggedIn, tags, isTagClicked, changeTag, selectedTag } = this.props;
     return (
       <div>

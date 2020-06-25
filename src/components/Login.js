@@ -12,7 +12,7 @@ class Login extends React.Component {
   }
 
   onChange (event) {
-    const { name, value } = event.target.name
+    const { name, value } = event.target;
     switch (name) {
       case 'email':
         this.setState({ email: value })
@@ -50,8 +50,8 @@ class Login extends React.Component {
       let data = await response.json()
       console.log(data)
       if (!data.error) {
-        // console.log(data);
-        this.props.onLogin()
+        console.log(data.user);
+        this.props.onLogin();
         localStorage.setItem('token', data.user.token)
         this.props.history.push('/')
       } else {

@@ -60,9 +60,9 @@ table {
     
     justify-content: space-between;
     ul{
-        max-width: 320px;
+        max-width: 400px;
         display: grid;
-        grid-template-columns:repeat( auto-fit,minmax(80px, 1fr));
+        grid-template-columns:repeat( auto-fit,minmax(100px, auto));
         justify-content: space-around;
         align-content:center;
     }
@@ -167,4 +167,7 @@ table {
 }
 .block{
     display: block;
+}
+h2{
+    text-align: center;
 }

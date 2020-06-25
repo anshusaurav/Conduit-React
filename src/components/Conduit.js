@@ -7,6 +7,8 @@ import Home from './Home'
 import Editor from './Editor'
 import Settings from './Settings'
 import Profile from './Profile'
+import {Icon} from 'semantic-ui-react'
+import IndividualArticle from './IndividualArticle'
 class Conduit extends React.Component {
   constructor (props) {
     super(props)
@@ -18,6 +20,7 @@ class Conduit extends React.Component {
         currentUser: null,
         selectedTag:null,
         homeSelectedTab: 0,
+        isUpdated: false
       }
     } else {
       this.state = {
@@ -27,10 +30,13 @@ class Conduit extends React.Component {
         currentUser: null,
         selectedTag: null,
         homeSelectedTab:0,
+        isUpdated: false
       }
     }
     this.onLogin = this.onLogin.bind(this);
+    this.onLogout = this.onLogout.bind(this);
     this.onTagClicked = this.onTagClicked.bind(this);
+    this.onUpdate = this.onUpdate.bind(this);
   }
   async componentDidMount () {
     
@@ -48,11 +54,65 @@ class Conduit extends React.Component {
       } catch (err) {
         console.error('Error:', err)
       }
+      if(this.state.isLoggedIn) {
+        const { token } = localStorage
+        try {
+          let response = await fetch(
+            'https://conduit.productionready.io/api/user',
+            {
+              method: 'GET',
+              headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Token ${token}`
+              }
+            }
+          )
+          let data = await response.json()
+          // console.log(data)
+          if (!data.error) {
+           this.setState({currentUser: data.user });
+          }
+        } catch (err) {
+          console.error('Error:', err)
+        }
+    }
     
   }
-  onLogin () {
-    this.setState({ isLoggedIn: true })
+  async componentDidUpdate(prevProps, prevState) {
+    if(prevState.isUpdated !== this.state.isUpdated) {
+      const { token } = localStorage
+        try {
+          let response = await fetch(
+            'https://conduit.productionready.io/api/user',
+            {
+              method: 'GET',
+              headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Token ${token}`
+              }
+            }
+          )
+          let data = await response.json()
+          // console.log(data)
+          if (!data.error) {
+           this.setState({currentUser: data.user });
+          }
+        } catch (err) {
+          console.error('Error:', err)
+        }
+    }
   }
+  onUpdate(boolean) {
+    this.setState({isUpdated: boolean})
+  }
+  onLogin (user) {
+    this.setState({ isLoggedIn: true });
+  }
+  onLogout(){
+    this.setState({isLoggedIn: false});
+    this.setState({currentUser: null})
+  }
+  
   onTagClicked (newTag) {
     
     this.setState({selectedTag: newTag}, function(){
@@ -64,6 +124,7 @@ class Conduit extends React.Component {
   }
   
   render () {
+    // console.log(this.state);
     return (
       <Router>
         <div className='container'>
@@ -83,22 +144,22 @@ class Conduit extends React.Component {
                   <Link to='/register'>Sign Up</Link>
                 </li>
               </ul>
-            ) : (
+            ) : this.state.currentUser?(
               <ul>
                 <li>
-                  <Link to='/'>Home</Link>
+                  <Link to='/'><Icon name='home' size='small'/>Home</Link>
                 </li>
                 <li>
-                  <Link to='/editor'>New Post</Link>
+                  <Link to='/editor'><Icon name='write' size='small'/>New Post</Link>
                 </li>
                 <li>
-                  <Link to='/settings'>Settings</Link>
+                  <Link to='/settings'><Icon name='setting' size='small' />Settings</Link>
                 </li>
                 <li>
-                  <Link to='/profile'>anshusaurav</Link>
+                  <Link to='/profiles'> <Icon name='user' size='small'/> {this.state.currentUser.username}</Link>
                 </li>
               </ul>
-            )}
+            ):null}
           </div>
           <Switch>
             <Route exact path='/'>
@@ -120,11 +181,15 @@ class Conduit extends React.Component {
               <Editor />
             </Route>
             <Route path='/settings'>
-              <Settings />
+              <Settings onLogout={this.onLogout} onUpdate={this.onUpdate}/>
             </Route>
-            <Route path='/profile'>
+            <Route path='/profiles/:username'>
               <Profile />
             </Route>
+            <Route path='/articles/:slug'>
+              <IndividualArticle /> 
+            </Route>
+              
           </Switch>
         </div>
       </Router>

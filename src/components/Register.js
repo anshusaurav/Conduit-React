@@ -11,7 +11,7 @@ class Register extends React.Component {
   }
 
   onChange (event) {
-    const { name, value } = event.target
+    const { name, value } = event.target;
     switch (name) {
       case 'username':
         this.setState({ username: value })
