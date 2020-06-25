@@ -8,13 +8,11 @@ class IndividualArticle extends React.Component {
   constructor (props) {
     super(props)
     this.state = { article: null, comments: null, isCommentUpdated: false}
+    this.handleCommentUpdate = this.handleCommentUpdate.bind(this);
   }
   async componentDidMount () {
-    // console.log(window.location.href);
-    const path = this.props.history.location.pathname
-    const { token } = localStorage
-    // https://conduit.productionready.io/api/articles/express-6bfonv/comments
-    // https://conduit.productionready.io/api/articles/express-6bfonv
+    const path = this.props.history.location.pathname;
+    const { token } = localStorage;
     try {
       let response = await fetch(
         `https://conduit.productionready.io/api${path}`,
@@ -26,8 +24,7 @@ class IndividualArticle extends React.Component {
           }
         }
       )
-      let data = await response.json()
-      // console.log(data)
+      let data = await response.json();
       if (!data.error) {
         this.setState({ article: data.article })
       }
@@ -46,7 +43,6 @@ class IndividualArticle extends React.Component {
           }
         )
         let data = await response.json()
-        console.log(data)
         if (!data.error) {
           this.setState({ comments: data.comments })
         }
@@ -55,10 +51,12 @@ class IndividualArticle extends React.Component {
       }
   }
   handleCommentUpdate(boolean) {
+    console.log('HAndle comment update called with ', boolean);
     this.setState({isCommentUpdated: boolean});
   }
   async componentDidUpdate(prevProps, prevState) {
     if(this.state.isCommentUpdated !== prevState.isCommentUpdated){
+      console.log('HERE');
       try {
         const path = this.props.history.location.pathname
     const { token } = localStorage
@@ -73,7 +71,6 @@ class IndividualArticle extends React.Component {
           }
         )
         let data = await response.json()
-        console.log(data)
         if (!data.error) {
           this.setState({ comments: data.comments })
         }
@@ -83,13 +80,12 @@ class IndividualArticle extends React.Component {
     }
   }
   render () {
-    // const {title} = this.props.slug;
     const {article, comments} = this.state;
-    let slug='';//article;
+    let slug='';
     if(article)
       slug = article.slug;
     return (
-        <div class='article-complete-div'>
+        <div className='article-complete-div'>
         {
             !article?(
                 <>
