@@ -1,27 +1,31 @@
-import React from 'react';
-import {Link} from 'react-router-dom'
-import { Item } from 'semantic-ui-react';
+import React from 'react'
+import { Link } from 'react-router-dom'
+import { Item, Card, Image } from 'semantic-ui-react'
 class ArticleAuthor extends React.Component {
   render () {
     // const article = this.props.article;
-    const {updatedAt} = this.props.article;
-    const {username, image} = this.props.article.author;
+    const { updatedAt } = this.props.article
+    const { username, image } = this.props.article.author
     return (
-      
-      <Item>
+      <div>
         <Link to={`/profiles/${username}`}>
-        <Item.Image
-          size='tiny'
-          src={image||'https://static.productionready.io/images/smiley-cyrus.jpg'}
-        />
-
-        <Item.Content>
-          <Item.Header as='a'>{username}</Item.Header>
-          <Item.Meta>{new Date(updatedAt).toDateString()}</Item.Meta>
-          
-        </Item.Content>
-        </Link>
-      </Item>
+          <Card>
+          <Card.Content>
+            <Image
+              floated='left'
+              size='mini'
+              src={
+                image ||
+                'https://static.productionready.io/images/smiley-cyrus.jpg'
+              }
+            />
+            <Card.Header>{username}</Card.Header>
+            <Card.Meta>{new Date(updatedAt).toDateString()}</Card.Meta>
+          </Card.Content>
+        
+      </Card>
+      </Link>
+      </div>
     )
   }
 }

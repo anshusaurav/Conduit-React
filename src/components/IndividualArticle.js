@@ -65,7 +65,7 @@ class IndividualArticle extends React.Component {
                 <FullPageFormLoader/>
                 </>
             ):(<div className='profile-div'>
-            <ArticleHero article={article}/>
+            <ArticleHero article={article} currentUser={this.props.currentUser}/>
             <ArticleDetails article={article}/>
             </div>)
         }

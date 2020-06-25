@@ -1,5 +1,11 @@
 import React from 'react'
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  NavLink
+} from 'react-router-dom'
 
 import Login from './Login'
 import Register from './Register'
@@ -7,7 +13,7 @@ import Home from './Home'
 import Editor from './Editor'
 import Settings from './Settings'
 import Profile from './Profile'
-import {Icon} from 'semantic-ui-react'
+import { Icon } from 'semantic-ui-react'
 import IndividualArticle from './IndividualArticle'
 class Conduit extends React.Component {
   constructor (props) {
@@ -18,7 +24,7 @@ class Conduit extends React.Component {
         isTagClicked: false,
         topTwentyTags: null,
         currentUser: null,
-        selectedTag:null,
+        selectedTag: null,
         homeSelectedTab: 0,
         isUpdated: false
       }
@@ -29,100 +35,95 @@ class Conduit extends React.Component {
         topTwentyTags: null,
         currentUser: null,
         selectedTag: null,
-        homeSelectedTab:0,
+        homeSelectedTab: 0,
         isUpdated: false
       }
     }
-    this.onLogin = this.onLogin.bind(this);
-    this.onLogout = this.onLogout.bind(this);
-    this.onTagClicked = this.onTagClicked.bind(this);
-    this.onUpdate = this.onUpdate.bind(this);
+    this.onLogin = this.onLogin.bind(this)
+    this.onLogout = this.onLogout.bind(this)
+    this.onTagClicked = this.onTagClicked.bind(this)
+    this.onUpdate = this.onUpdate.bind(this)
   }
   async componentDidMount () {
-    
-    
+    try {
+      const response = await fetch(
+        'https://conduit.productionready.io/api/tags',
+        {
+          method: 'GET'
+        }
+      )
+      const data = await response.json()
+      // console.log(data)
+      this.setState({ topTwentyTags: data.tags })
+    } catch (err) {
+      console.error('Error:', err)
+    }
+    if (this.state.isLoggedIn) {
+      const { token } = localStorage
       try {
-        const response = await fetch(
-          'https://conduit.productionready.io/api/tags',
+        let response = await fetch(
+          'https://conduit.productionready.io/api/user',
           {
-            method: 'GET'
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Token ${token}`
+            }
           }
         )
-        const data = await response.json()
+        let data = await response.json()
         // console.log(data)
-        this.setState({ topTwentyTags: data.tags })
+        if (!data.error) {
+          this.setState({ currentUser: data.user })
+        }
       } catch (err) {
         console.error('Error:', err)
       }
-      if(this.state.isLoggedIn) {
-        const { token } = localStorage
-        try {
-          let response = await fetch(
-            'https://conduit.productionready.io/api/user',
-            {
-              method: 'GET',
-              headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Token ${token}`
-              }
-            }
-          )
-          let data = await response.json()
-          // console.log(data)
-          if (!data.error) {
-           this.setState({currentUser: data.user });
-          }
-        } catch (err) {
-          console.error('Error:', err)
-        }
     }
-    
   }
-  async componentDidUpdate(prevProps, prevState) {
-    if(prevState.isUpdated !== this.state.isUpdated) {
+  async componentDidUpdate (prevProps, prevState) {
+    if (prevState.isUpdated !== this.state.isUpdated) {
       const { token } = localStorage
-        try {
-          let response = await fetch(
-            'https://conduit.productionready.io/api/user',
-            {
-              method: 'GET',
-              headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Token ${token}`
-              }
+      try {
+        let response = await fetch(
+          'https://conduit.productionready.io/api/user',
+          {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Token ${token}`
             }
-          )
-          let data = await response.json()
-          // console.log(data)
-          if (!data.error) {
-           this.setState({currentUser: data.user });
           }
-        } catch (err) {
-          console.error('Error:', err)
+        )
+        let data = await response.json()
+        // console.log(data)
+        if (!data.error) {
+          this.setState({ currentUser: data.user })
         }
+      } catch (err) {
+        console.error('Error:', err)
+      }
     }
   }
-  onUpdate(boolean) {
-    this.setState({isUpdated: boolean})
+  onUpdate (boolean) {
+    this.setState({ isUpdated: boolean })
   }
   onLogin (user) {
-    this.setState({ isLoggedIn: true });
+    this.setState({ isLoggedIn: true })
   }
-  onLogout(){
-    this.setState({isLoggedIn: false});
-    this.setState({currentUser: null})
+  onLogout () {
+    this.setState({ isLoggedIn: false })
+    this.setState({ currentUser: null })
   }
-  
+
   onTagClicked (newTag) {
-    
-    this.setState({selectedTag: newTag}, function(){
-      this.setState({ isTagClicked: true }, function(){
-      console.log(this.state.selectedTag);
+    this.setState({ selectedTag: newTag }, function () {
+      this.setState({ isTagClicked: true }, function () {
+        console.log(this.state.selectedTag)
+      })
     })
-  });
-  
   }
-  
+
   render () {
     // console.log(this.state);
     return (
@@ -135,31 +136,92 @@ class Conduit extends React.Component {
             {!this.state.isLoggedIn ? (
               <ul>
                 <li>
-                  <Link to='/'>Home</Link>
+                  <NavLink
+                    activeStyle={{
+                      fontWeight: 'bold',
+                      color: 'rgba(0,0,0,.87)'
+                    }}
+                    to='/'
+                  >
+                    Home
+                  </NavLink>
                 </li>
                 <li>
-                  <Link to='/login'>Sign In</Link>
+                  <NavLink
+                    activeStyle={{
+                      fontWeight: 'bold',
+                      color: 'rgba(0,0,0,.87)'
+                    }}
+                    to='/login'
+                  >
+                    Sign In
+                  </NavLink>
                 </li>
                 <li>
-                  <Link to='/register'>Sign Up</Link>
+                  <NavLink
+                    activeStyle={{
+                      fontWeight: 'bold',
+                      color: 'rgba(0,0,0,.87)'
+                    }}
+                    to='/register'
+                  >
+                    Sign Up
+                  </NavLink>
                 </li>
               </ul>
-            ) : this.state.currentUser?(
+            ) : this.state.currentUser ? (
               <ul>
                 <li>
-                  <Link to='/'><Icon name='home' size='small'/>Home</Link>
+                  <NavLink
+                    activeStyle={{
+                      fontWeight: 'bold',
+                      color: 'rgba(0,0,0,.87)'
+                    }}
+                    to='/'
+                  >
+                    <Icon name='home' size='small' />
+                    Home
+                  </NavLink>
                 </li>
                 <li>
-                  <Link to='/editor'><Icon name='write' size='small'/>New Post</Link>
+                  <NavLink
+                    activeStyle={{
+                      fontWeight: 'bold',
+                      color: 'rgba(0,0,0,.87)'
+                    }}
+                    to='/editor'
+                  >
+                    <Icon name='write' size='small' />
+                    New Post
+                  </NavLink>
                 </li>
                 <li>
-                  <Link to='/settings'><Icon name='setting' size='small' />Settings</Link>
+                  <NavLink
+                    activeStyle={{
+                      fontWeight: 'bold',
+                      color: 'rgba(0,0,0,.87)'
+                    }}
+                    to='/settings'
+                  >
+                    <Icon name='setting' size='small' />
+                    Settings
+                  </NavLink>
                 </li>
                 <li>
-                  <Link to={`/profiles/${this.state.currentUser.username}`}> <Icon name='user' size='small'/> {this.state.currentUser.username}</Link>
+                  <NavLink
+                    activeStyle={{
+                      fontWeight: 'bold',
+                      color: 'rgba(0,0,0,.87)'
+                    }}
+                    to={`/profiles/${this.state.currentUser.username}`}
+                  >
+                    {' '}
+                    <Icon name='user' size='small' />{' '}
+                    {this.state.currentUser.username}
+                  </NavLink>
                 </li>
               </ul>
-            ):null}
+            ) : null}
           </div>
           <Switch>
             <Route exact path='/'>
@@ -181,15 +243,14 @@ class Conduit extends React.Component {
               <Editor />
             </Route>
             <Route path='/settings'>
-              <Settings onLogout={this.onLogout} onUpdate={this.onUpdate}/>
+              <Settings onLogout={this.onLogout} onUpdate={this.onUpdate} />
             </Route>
             <Route path='/profiles/:username'>
               <Profile />
             </Route>
             <Route path='/articles/:slug'>
-              <IndividualArticle currentUser={this.state.currentUser}/> 
+              <IndividualArticle currentUser={this.state.currentUser} />
             </Route>
-              
           </Switch>
         </div>
       </Router>

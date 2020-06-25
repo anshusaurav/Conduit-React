@@ -5,10 +5,10 @@ class SmallArticle extends React.Component{
     
     render() {
         return (
-        <>
+        <div className='small-article'>
         <ArticleAuthor article={this.props.article}/>
         <ArticlePreview article={this.props.article}/>
-        </>
+        </div>
         )
     }
 }

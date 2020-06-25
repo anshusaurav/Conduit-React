@@ -8,7 +8,7 @@ class Editor extends React.Component {
       title: '',
       description: '',
       body: '',
-      tags: []
+      tagList: null
     }
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -28,7 +28,7 @@ class Editor extends React.Component {
         break
       case 'tags':
         const tagsArr = value.split(' ')
-        this.setState({ tags: tagsArr })
+        this.setState({ tagList: tagsArr })
         break
       default:
         console.log('We are out of targets.')
@@ -36,10 +36,10 @@ class Editor extends React.Component {
   }
   async onSubmit (event) {
     event.preventDefault()
-    const { title, description, body, tags } = this.state;
+    const { title, description, body, tagList } = this.state;
     const { token } = localStorage;
     // console.log(token);
-    const article = { article: { title, description, body, tags } }
+    const article = { article: { title, description, body, tagList } }
 
     try {
       let response = await fetch(
@@ -54,8 +54,9 @@ class Editor extends React.Component {
         }
       )
       let data = await response.json();
-      // console.log(data);
+      console.log('res ', data);
       if (!data.error) {
+        
         this.props.history.push('/');
       }
     } catch (err) {
@@ -63,6 +64,7 @@ class Editor extends React.Component {
     }
   }
   render () {
+    const { title, description, body, tagList } = this.state;
     return (
       <>
       <h2>Write new article</h2>
@@ -72,6 +74,7 @@ class Editor extends React.Component {
             placeholder='Article Title'
             name='title'
             onChange={this.onChange}
+            value={title}
           />
         </Form.Field>
         <Form.Field>
@@ -79,6 +82,7 @@ class Editor extends React.Component {
             placeholder="What's this article about?"
             name='description'
             onChange={this.onChange}
+            value={description}
           />
         </Form.Field>
         <Form.Field>
@@ -86,6 +90,7 @@ class Editor extends React.Component {
             placeholder='Tell us more'
             name='body'
             onChange={this.onChange}
+            value={body}
           />
         </Form.Field>
         <Form.Field>
@@ -93,6 +98,7 @@ class Editor extends React.Component {
             placeholder='Enter Tags'
             name='tags'
             onChange={this.onChange}
+            value={tagList?tagList.join(' '):''}
           />
         </Form.Field>
         <Button type='submit'>Publish</Button>
