@@ -156,7 +156,7 @@ class Conduit extends React.Component {
                   <Link to='/settings'><Icon name='setting' size='small' />Settings</Link>
                 </li>
                 <li>
-                  <Link to='/profiles'> <Icon name='user' size='small'/> {this.state.currentUser.username}</Link>
+                  <Link to={`/profiles/${this.state.currentUser.username}`}> <Icon name='user' size='small'/> {this.state.currentUser.username}</Link>
                 </li>
               </ul>
             ):null}
@@ -187,7 +187,7 @@ class Conduit extends React.Component {
               <Profile />
             </Route>
             <Route path='/articles/:slug'>
-              <IndividualArticle /> 
+              <IndividualArticle currentUser={this.state.currentUser}/> 
             </Route>
               
           </Switch>

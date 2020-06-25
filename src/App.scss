@@ -142,7 +142,7 @@ table {
     justify-content: center;
     align-items: center;
     height: 240px;
-    background-color: #999999;
+    background-color: #333333;
     .profile-picture-div{
         width: 144px;
         height: 144px;
@@ -158,6 +158,19 @@ table {
         position: absolute;
         bottom: 20px;
         right: 60px;
+    }
+}
+.article-hero-section{
+    padding: 1rem;
+    height: 240px;
+    background-color: #333333;
+    .article-title{
+        font-size: 28px;
+        color: white;
+    }
+    .article-hero-grid{
+        display: grid !important;
+        grid-template-columns: 1fr 1fr;
     }
 }
 .profile-div{

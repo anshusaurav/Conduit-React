@@ -7,6 +7,7 @@ class ArticleAuthor extends React.Component {
     const {updatedAt} = this.props.article;
     const {username, image} = this.props.article.author;
     return (
+      
       <Item>
         <Link to={`/profiles/${username}`}>
         <Item.Image
@@ -16,7 +17,7 @@ class ArticleAuthor extends React.Component {
 
         <Item.Content>
           <Item.Header as='a'>{username}</Item.Header>
-          <Item.Meta>{updatedAt}</Item.Meta>
+          <Item.Meta>{new Date(updatedAt).toDateString()}</Item.Meta>
           
         </Item.Content>
         </Link>
