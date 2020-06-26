@@ -11,6 +11,7 @@ class TagsAside extends React.Component{
       }
     onClickTag(event){
       this.props.changeTag(event.target.textContent);
+      this.props.handleAddTab();
     }
     Loaders = ()=>{
       let arr = new Array(5).fill(1);

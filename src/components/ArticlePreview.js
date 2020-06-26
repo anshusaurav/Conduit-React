@@ -11,11 +11,11 @@ class ArticlePreview extends React.Component {
         <Item>
         <Link className='links-react' to={`/articles/${slug}`}>
         <Item.Content>
-        <Item.Header as='a'>{title}</Item.Header>
+        <Item.Header>{title}</Item.Header>
         <Item.Description>{description}</Item.Description>
         <Item.Extra>ReadMore</Item.Extra>
-        {   tagList.map(elem =>{
-                return <Button color='instagram' size='mini'>{elem}</Button>
+        {   tagList.map((elem,index) =>{
+                return <Button key={index} color='instagram' size='mini'>{elem}</Button>
                 })
             }
         {/* <Item.Extra className='tags'>{tags}</Item.Extra> */}

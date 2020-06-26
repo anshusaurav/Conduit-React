@@ -9,10 +9,26 @@ class Home extends React.Component {
     super(props)
 
     this.state = { activeIndex: 0 }
+    this.handleChangeTab = this.handleChangeTab.bind(this);
+    this.handleAddTab = this.handleAddTab.bind(this);
   }
-
+  handleChangeTab(activeIndex){
+    console.log(activeIndex);
+    this.setState({activeIndex : activeIndex});
+    // consosle.log)
+  }
+  handleAddTab(){
+    if(this.props.isLoggedIn) {
+      this.setState({activeIndex: 2});
+    }
+    else {
+      this.setState({activeIndex: 1});
+    }
+  }
+  
   render () {
     const { isLoggedIn, tags, isTagClicked, changeTag, selectedTag } = this.props;
+    
     return (
       <div>
         {!isLoggedIn && <HeroSection />}
@@ -21,8 +37,10 @@ class Home extends React.Component {
             isLoggedIn={isLoggedIn}
             isTagClicked={isTagClicked}
             selectedTag = {selectedTag}
+            handleChangeTab = {this.handleChangeTab}
+            activeIndex = {this.state.activeIndex}
           />
-          <AsideTags tags={tags} changeTag={changeTag} />
+          <AsideTags tags={tags} changeTag={changeTag} handleAddTab = {this.handleAddTab} />
         </section>
       </div>
     )

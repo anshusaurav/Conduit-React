@@ -2,7 +2,9 @@
    v2.0 | 20110126
    License: none (public domain)
 */
-@import url('https://fonts.googleapis.com/css2?family=Blinker:wght@400;600;700;800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Blinker:wght@400;600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@300;400;500;600;700&display=swap");
 html,
 body,
 div,
@@ -134,15 +136,22 @@ table {
 .container {
   width: 1200px;
   margin: 0 auto;
+  font-family: "IBM Plex Serif", serif;
+  // font-family: 'IBM Plex Serif', serif;
 }
 .header-nav {
   display: flex;
-
+  flex-wrap: wrap;
+  h1 {
+    padding-left: 1rem;
+    font-size: 32px;
+    font-family: "IBM Plex Serif", serif;
+  }
   justify-content: space-between;
   ul {
-    max-width: 400px;
+    max-width: 480px;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(100px, auto));
+    grid-template-columns: repeat(auto-fit, minmax(120px, auto));
     justify-content: space-around;
     align-content: center;
   }
@@ -182,6 +191,26 @@ table {
   display: grid;
   grid-template-columns: 3fr 1fr;
   grid-gap: 0.5rem;
+  .tabs-menu {
+    .pointing {
+      
+      .segment {
+        padding: 0;
+        padding-right: 0;
+      
+    }
+      .item {
+        font-weight: 500;
+        font-size: 1.25rem;
+        font-family: "IBM Plex Serif", serif;
+      }
+      .active {
+        font-weight: 500;
+        font-size: 1.25rem;
+        font-family: "IBM Plex Serif", serif;
+      }
+    }
+  }
 }
 
 .tags-section {
@@ -217,11 +246,11 @@ table {
   // align-content: center;
   height: 240px;
   background-color: #333333;
-  h3{
+  h3 {
     margin: 0;
     color: white;
   }
-  h4{
+  h4 {
     margin: 0;
     color: grey;
   }
@@ -271,14 +300,13 @@ table {
   }
 }
 .article-details-div {
-  margin: 0.5rem;
-  margin-bottom: 1rem;
+  // margin: 0.5rem;
+  margin-bottom: 1rem 0.5rem;
   border-bottom: 1px solid #f3f3f3;
   .item {
     margin-bottom: 0.5rem;
     .content {
-      padding-top: 0;
-      padding-bottom: 0;
+      padding: 0 1em;
       .description {
         font-size: 20px;
         margin: 1.25rem 0.5rem;
@@ -289,6 +317,18 @@ table {
 .profile-div {
   .profile-articles {
     margin-top: 1.5rem;
+    .pointing {
+      .item {
+        font-weight: 500;
+        font-size: 1.25rem;
+        font-family: "IBM Plex Serif", serif;
+      }
+      .active {
+        font-weight: 500;
+        font-size: 1.25rem;
+        font-family: "IBM Plex Serif", serif;
+      }
+    }
   }
 }
 .article-div {
@@ -314,35 +354,59 @@ body .ui.cards > .card {
   .ui.comments {
     width: 60%;
     margin: 0 auto;
-    
+
     padding-bottom: 1rem;
     padding-top: 1rem;
   }
 }
-.items{
-
-.links-react{
-  .content{
-    padding: 0 1rem;
-    .header{
-      color: rgb(8, 9, 10);
-      font-size: 24px;
-      font-weight: 700;
-      text-transform: capitalize;
-      line-height: 2.0;
-      font-family: 'Blinker', sans-serif;
-      letter-spacing: normal;
-    }
-    .description{
-      color: rgb(8, 9, 10);
-      font-size: 18px;
-      font-weight: 600;
-      line-height: 1.75;
-      text-transform: capitalize;
-      font-family: 'Blinker', sans-serif;
-      letter-spacing: normal;
+.items {
+  .small-article {
+    .card {
+      .content {
+        padding: 0 1rem;
+        padding-top: 1rem;
+        .image {
+          border-radius: 50%;
+        }
+        .header {
+          color: rgba(0, 0, 0, 0.4);
+          font-size: 16px !important;
+        }
+        .meta {
+          font-size: 14px !important;
+        }
+      }
     }
   }
-  
 }
+.items {
+  .links-react {
+    .content {
+      padding: 0 1rem;
+      .header {
+        color: rgb(8, 9, 10);
+        font-size: 24px;
+        font-weight: 700;
+        text-transform: capitalize;
+        line-height: 2;
+        font-family: "Blinker", sans-serif;
+        letter-spacing: normal;
+      }
+      .description {
+        color: rgb(8, 9, 10);
+        color: rgba(8, 9, 10, 0.8);
+        font-size: 18px;
+        font-weight: 600;
+        line-height: 1.75;
+        text-transform: capitalize;
+        font-family: "Blinker", sans-serif;
+        letter-spacing: normal;
+      }
+
+      .button {
+        margin-top: 0.5rem;
+        margin-bottom: 0.5rem;
+      }
+    }
+  }
 }

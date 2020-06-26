@@ -6,13 +6,13 @@ class HomeTabsWithLoader extends React.Component {
     super(props)
 
     this.state = {
-      activeIndex: 0,
+      
       globalArticles: null,
       feedArticles: null,
       tagArticles: null
     }
   }
-  handleTabChange = (e, { activeIndex }) => this.setState({ activeIndex })
+  handleTabChange = (e, { activeIndex }) => this.props.handleChangeTab( activeIndex )
 
   async componentDidMount () {
     const { isLoggedIn, isTagClicked, selectedTag } = this.props;
@@ -72,7 +72,7 @@ class HomeTabsWithLoader extends React.Component {
     if(prevProps.selectedTag !== this.props.selectedTag) {
       this.setState({tagArticles:null}); 
       try {
-        console.log(localStorage.token)
+        console.log(localStorage.token);
         const response = await fetch(
           `https://conduit.productionready.io/api/articles?tag=${selectedTag}`,
           {
@@ -90,9 +90,10 @@ class HomeTabsWithLoader extends React.Component {
     }
   }
   render () {
-    let panes
+    let panes;
+    const {activeIndex} = this.props;
     const {
-      activeIndex,
+      
       isLoading,
       feedArticles,
       globalArticles,

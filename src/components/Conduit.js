@@ -140,7 +140,7 @@ class Conduit extends React.Component {
                     activeStyle={{
                       fontWeight: 'bold',
                       background: 'rgba(0,0,0,.87)',
-                      padding: '2px 4px'
+                      padding: '4px 6px'
                     }}
                     to='/'
                   >
@@ -152,7 +152,7 @@ class Conduit extends React.Component {
                     activeStyle={{
                       fontWeight: 'bold',
                       background: 'rgba(0,0,0,.87)',
-                      padding: '2px 4px'
+                      padding: '4px 6px'
                     }}
                     to='/login'
                   >
@@ -164,7 +164,7 @@ class Conduit extends React.Component {
                     activeStyle={{
                       fontWeight: 'bold',
                       background: 'rgba(0,0,0,.87)',
-                      padding: '2px 4px'
+                      padding: '4px 6px'
                     }}
                     to='/register'
                   >
@@ -179,7 +179,7 @@ class Conduit extends React.Component {
                     activeStyle={{
                       fontWeight: 'bold',
                       background: 'rgba(0,0,0,.87)',
-                      padding: '2px 4px'
+                      padding: '4px 6px'
                     }}
                     to='/'
                   >
@@ -192,7 +192,7 @@ class Conduit extends React.Component {
                     activeStyle={{
                       fontWeight: 'bold',
                       background: 'rgba(0,0,0,.87)',
-                      padding: '2px 4px'
+                      padding: '4px 6px'
                     }}
                     to='/editor'
                   >
@@ -205,7 +205,7 @@ class Conduit extends React.Component {
                     activeStyle={{
                       fontWeight: 'bold',
                       background: 'rgba(0,0,0,.87)',
-                      padding: '2px 4px'
+                      padding: '4px 6px'
                     }}
                     to='/settings'
                   >
@@ -218,7 +218,7 @@ class Conduit extends React.Component {
                     activeStyle={{
                       fontWeight: 'bold',
                       background: 'rgba(0,0,0,.87)',
-                      padding: '2px 4px'
+                      padding: '4px 6px'
                     }}
                     to={`/profiles/${this.state.currentUser.username}`}
                   >
