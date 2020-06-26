@@ -332,6 +332,18 @@ table {
 .profile-div {
   .profile-articles {
     margin-top: 1.5rem;
+    .bottom{
+      .buttons{
+        display: grid;
+        grid-template-columns: repeat(20, 1fr);
+        // align-content: center;
+        .button{
+          margin:0  0.25rem; 
+
+          margin-bottom: 0.25rem;
+        }
+      }
+    }
     .pointing {
       .item {
         font-weight: 500;
@@ -363,6 +375,15 @@ body .ui.cards > .card {
 .small-article {
   border-bottom: 1px solid #f3f3f3;
   padding-bottom: 1.25rem;
+  .small-article-top{
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+  }
+  .article-like-section{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }
 
 .article-complete-div {
@@ -376,6 +397,7 @@ body .ui.cards > .card {
 }
 .items {
   .small-article {
+
     .card {
       .content {
         padding: 0 1rem;

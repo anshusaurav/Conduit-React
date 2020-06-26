@@ -10,12 +10,12 @@ class Pagination extends React.Component {
         this.props.handlePagination(+num);
     }
     render() {
-        const pageCnt = Math.ceil(this.props.totalSize/10);
+        const pageCnt = Math.floor(this.props.totalSize/10);
         const arrForSakeOfMap = new Array(pageCnt).fill(1);
         return (
             <Button.Group color='blue'>
             {
-                arrForSakeOfMap.map((elem, index) =><Button name={index+1} circular icon onClick={this.handleClick}>{index+1}</Button>)
+                arrForSakeOfMap.map((elem, index) =><Button name={index+1} key={index} circular icon onClick={this.handleClick}>{index+1}</Button>)
             }
             </Button.Group>
 

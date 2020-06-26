@@ -238,6 +238,7 @@ class Conduit extends React.Component {
                 tags={this.state.topTwentyTags}
                 changeTag={this.onTagClicked}
                 selectedTag={this.state.selectedTag}
+                currentUser={this.state.currentUser} 
               />
             </Route>
             <Route path='/login'>

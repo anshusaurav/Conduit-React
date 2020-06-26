@@ -15,7 +15,7 @@ class ArticleList extends React.Component{
         <Item.Group>
         {
            !articles ? this.Loaders() :articles.map((article, index) =>{
-                return <SmallArticle article={article} key={index}/>
+                return <SmallArticle article={article} key={index} currentUser={this.props.currentUser}/>
             })
         }
        

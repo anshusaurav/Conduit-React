@@ -36,7 +36,7 @@ class HomeTabsWithLoader extends React.Component {
         }
       );
       const data = await response.json();
-      console.log(data);
+      // console.log(data);
       if(!data.errors) {
       this.setState({ globalArticles: data.articles });
       this.setState({gACount: data.articlesCount});
@@ -57,7 +57,7 @@ class HomeTabsWithLoader extends React.Component {
           }
         );
         const data = await response.json();
-        console.log('feed', data);
+        // console.log('feed', data);
         if(!data.errors){
           this.setState({fACount: data.articlesCount});
           this.setState({ feedArticles: data.articles })
@@ -68,7 +68,6 @@ class HomeTabsWithLoader extends React.Component {
     }
     if (isTagClicked) {
       try {
-        // console.log(localStorage.token)
         const response = await fetch(
           `https://conduit.productionready.io/api/articles?tag=${selectedTag}&limit=10&offset=${start}`,
           {
@@ -79,7 +78,7 @@ class HomeTabsWithLoader extends React.Component {
           }
         )
         const data = await response.json();
-        console.log('tag', data);
+        // console.log('tag', data);
         if(!data.errors) {
         this.setState({ tagArticles: data.articles })
         this.setState({tACount: data.articlesCount});
@@ -95,18 +94,19 @@ class HomeTabsWithLoader extends React.Component {
     if(prevProps.selectedTag !== selectedTag || prevState.start !== start) {
       this.setState({tagArticles:null}); 
       try {
-        console.log(localStorage.token);
+        // console.log(localStorage.token);
         const response = await fetch(
           `https://conduit.productionready.io/api/articles?tag=${selectedTag}&limit=10&offset=${start}`,
           {
             method: 'GET',
             headers: {
-              'Content-Type': 'application/json'
+              'Content-Type': 'application/json',
+              
             }
           }
         )
         const data = await response.json();
-        console.log('tag', data);
+        // console.log('tag', data);
         this.setState({ tagArticles: data.articles });
         this.setState({tACount: data.articlesCount});
       } catch (err) {
@@ -122,7 +122,7 @@ class HomeTabsWithLoader extends React.Component {
           }
         );
         const data = await response.json();
-        console.log(data);
+        // console.log(data);
         if(!data.errors) {
         this.setState({ globalArticles: data.articles });
         this.setState({gACount: data.articlesCount});
@@ -144,7 +144,7 @@ class HomeTabsWithLoader extends React.Component {
           }
         );
         const data = await response.json();
-        console.log('feed', data);
+        // console.log('feed', data);
         if(!data.errors){
           this.setState({fACount: data.articlesCount});
           this.setState({ feedArticles: data.articles })
@@ -165,7 +165,7 @@ class HomeTabsWithLoader extends React.Component {
       globalArticles,
       tagArticles, fACount, gACount, tACount
     } = this.state;
-    const {selectedTag, isLoggedIn, isTagClicked} = this.props;
+    const {selectedTag, isLoggedIn, isTagClicked, currentUser} = this.props;
     if (isLoggedIn) {
       if (isTagClicked) {
         panes = [
@@ -173,7 +173,7 @@ class HomeTabsWithLoader extends React.Component {
             menuItem: 'Your Feed',
             render: () => (
               <Tab.Pane>
-                <ArticleList articles={feedArticles} />
+                <ArticleList articles={feedArticles} currentUser={currentUser}/>
                 <Pagination totalSize = {fACount} handlePagination={this.handlePagination}/>
               </Tab.Pane>
             )
@@ -182,7 +182,7 @@ class HomeTabsWithLoader extends React.Component {
             menuItem: 'Global Feed',
             render: () => (
               <Tab.Pane>
-                <ArticleList articles={globalArticles} />
+                <ArticleList articles={globalArticles} currentUser={currentUser}/>
                 <Pagination totalSize = {gACount} handlePagination={this.handlePagination}/>
               </Tab.Pane>
               
