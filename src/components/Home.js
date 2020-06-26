@@ -40,6 +40,7 @@ class Home extends React.Component {
             handleChangeTab = {this.handleChangeTab}
             activeIndex = {this.state.activeIndex}
             currentUser = {this.props.currentUser}
+            onUpdate={this.props.onUpdate}
           />
           <AsideTags tags={tags} changeTag={changeTag} handleAddTab = {this.handleAddTab} />
         </section>

@@ -7,7 +7,7 @@ class ArticleDetails extends React.Component {
     return (
         <div className='article-details-div'>
       <Item>
-        <Item.Content>
+        <Item.Content>  
           <Item.Description>{body}</Item.Description>
           <Item.Meta>
             {   tagList.map(elem =>{

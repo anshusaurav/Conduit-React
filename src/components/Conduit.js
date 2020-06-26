@@ -106,8 +106,10 @@ class Conduit extends React.Component {
     }
   }
   onUpdate (boolean) {
+    console.log('Suny old ');
     this.setState({ isUpdated: boolean })
   }
+  
   onLogin (user) {
     this.setState({ isLoggedIn: true })
   }
@@ -137,23 +139,16 @@ class Conduit extends React.Component {
               <ul>
                 <li>
                   <NavLink
-                    activeStyle={{
-                      fontWeight: 'bold',
-                      background: 'rgba(0,0,0,.87)',
-                      padding: '4px 6px'
-                    }}
+                    activeClassName='nav-active'
                     to='/'
+                    exact={true}
                   >
                     Home
                   </NavLink>
                 </li>
                 <li>
                   <NavLink
-                    activeStyle={{
-                      fontWeight: 'bold',
-                      background: 'rgba(0,0,0,.87)',
-                      padding: '4px 6px'
-                    }}
+                    activeClassName='nav-active'
                     to='/login'
                   >
                     Sign In
@@ -161,11 +156,7 @@ class Conduit extends React.Component {
                 </li>
                 <li>
                   <NavLink
-                    activeStyle={{
-                      fontWeight: 'bold',
-                      background: 'rgba(0,0,0,.87)',
-                      padding: '4px 6px'
-                    }}
+                    activeClassName='nav-active'
                     to='/register'
                   >
                     Sign Up
@@ -176,12 +167,9 @@ class Conduit extends React.Component {
               <ul>
                 <li>
                   <NavLink
-                    activeStyle={{
-                      fontWeight: 'bold',
-                      background: 'rgba(0,0,0,.87)',
-                      padding: '4px 6px'
-                    }}
+                    activeClassName='nav-active'
                     to='/'
+                    exact={true}
                   >
                     <Icon name='home' size='small' />
                     Home
@@ -189,11 +177,7 @@ class Conduit extends React.Component {
                 </li>
                 <li>
                   <NavLink
-                    activeStyle={{
-                      fontWeight: 'bold',
-                      background: 'rgba(0,0,0,.87)',
-                      padding: '4px 6px'
-                    }}
+                    activeClassName='nav-active'
                     to='/editor'
                   >
                     <Icon name='write' size='small' />
@@ -202,11 +186,7 @@ class Conduit extends React.Component {
                 </li>
                 <li>
                   <NavLink
-                    activeStyle={{
-                      fontWeight: 'bold',
-                      background: 'rgba(0,0,0,.87)',
-                      padding: '4px 6px'
-                    }}
+                    activeClassName='nav-active'
                     to='/settings'
                   >
                     <Icon name='setting' size='small' />
@@ -215,11 +195,7 @@ class Conduit extends React.Component {
                 </li>
                 <li>
                   <NavLink
-                    activeStyle={{
-                      fontWeight: 'bold',
-                      background: 'rgba(0,0,0,.87)',
-                      padding: '4px 6px'
-                    }}
+                    activeClassName='nav-active'
                     to={`/profiles/${this.state.currentUser.username}`}
                   >
                     {' '}
@@ -239,6 +215,7 @@ class Conduit extends React.Component {
                 changeTag={this.onTagClicked}
                 selectedTag={this.state.selectedTag}
                 currentUser={this.state.currentUser} 
+                onUpdate = {this.onUpdate}
               />
             </Route>
             <Route path='/login'>
@@ -254,7 +231,7 @@ class Conduit extends React.Component {
               <Settings onLogout={this.onLogout} onUpdate={this.onUpdate} />
             </Route>
             <Route path='/profiles/:username'>
-              <Profile  currentUser={this.state.currentUser} />
+              <Profile  currentUser={this.state.currentUser}  onUpdate={this.onUpdate}/>
             </Route>
             <Route path='/articles/:slug'>
               <IndividualArticle currentUser={this.state.currentUser} />

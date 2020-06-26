@@ -132,6 +132,7 @@ table {
 * {
   box-sizing: border-box;
   line-height: 1.5;
+  scrollbar-width: none;
 }
 .container {
   width: 1200px;
@@ -149,11 +150,26 @@ table {
   }
   justify-content: space-between;
   ul {
-    max-width: 480px;
+    max-width: 600px;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(120px, auto));
+    grid-template-columns: repeat(auto-fit, minmax(144px, auto));
     justify-content: space-around;
     align-content: center;
+    li{
+      a {
+        font-size: 16px;
+        font-weight: 500;
+        color: rgba(0, 0, 0, 0.469);
+      }
+    }
+    .nav-active{
+      
+        font-weight: bold;
+        background: rgba(189, 66, 216, 0.517);
+        padding: 4px 8px;
+        border-radius: 2px;
+     
+    }
   }
 }
 .login-div {

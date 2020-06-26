@@ -14,7 +14,7 @@ class Profile extends React.Component {
   }
 
   async componentDidMount () {
-    const path = this.props.history.location.pathname
+    const path = this.props.history.location.pathname;
     const usedPath = path.substring(1)
     const index = usedPath.indexOf('/')
     const uName = usedPath.substring(index + 1)
@@ -40,7 +40,7 @@ class Profile extends React.Component {
         })
       }
       let data = await response.json()
-      console.log(data)
+      // console.log(data)
       if (!data.error) {
         this.setState({ profile: data.profile })
       }
@@ -49,8 +49,11 @@ class Profile extends React.Component {
     }
   }
   async componentDidUpdate (prevProps, prevState) {
+    // console.log('SADASD');
+    console.log(this.props.history.location.pathname, prevProps.history.location.pathname)
     if (this.state.isUpdate !== prevState.isUpdate) {
-      const path = this.props.history.location.pathname
+      console.log(this.props.history.location.pathname, prevProps.history.location.pathname)
+      const path = this.props.history.location.pathname;
       const usedPath = path.substring(1)
       const index = usedPath.indexOf('/')
       const uName = usedPath.substring(index + 1)
@@ -100,6 +103,7 @@ class Profile extends React.Component {
           <ProfileArticles
             currentUser={this.props.currentUser}
             profile={this.state.profile}
+            onUpdate={this.props.onUpdate}
           />
         ) : (
           <FullPageNormalLoader />
