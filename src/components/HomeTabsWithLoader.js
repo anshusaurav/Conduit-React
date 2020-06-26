@@ -18,7 +18,10 @@ class HomeTabsWithLoader extends React.Component {
     }
     this.handlePagination = this.handlePagination.bind(this);
   }
-  handleTabChange = (e, { activeIndex }) => this.props.handleChangeTab( activeIndex )
+  handleTabChange = ((e, { activeIndex }) => {
+    this.props.handleChangeTab( activeIndex );
+    this.setState({start: 0});
+  })
   handlePagination(num) {
     this.setState({start: num*10});
   }
