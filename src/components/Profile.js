@@ -20,7 +20,7 @@ class Profile extends React.Component {
     const uName = usedPath.substring(index + 1)
     const { token } = localStorage
     const url = `https://conduit.productionready.io/api/profiles/${uName}`
-    // if(token)   {
+    
     try {
       let response
       if (token) {
@@ -56,7 +56,7 @@ class Profile extends React.Component {
       const uName = usedPath.substring(index + 1)
       const { token } = localStorage
       const url = `https://conduit.productionready.io/api/profiles/${uName}`
-      // if(token)   {
+     
       try {
         let response
         if (token) {

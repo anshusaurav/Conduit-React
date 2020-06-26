@@ -1,4 +1,5 @@
 import React from 'react'
+import {withRouter} from 'react-router-dom'
 import { Button } from 'semantic-ui-react'
 class ProfileHero extends React.Component {
   constructor (props) {
@@ -19,8 +20,7 @@ class ProfileHero extends React.Component {
             Authorization: `Token ${token}`
           }
         })
-        let data = await response.json()
-        // console.log('res ', data)
+        let data = await response.json();
         if (!data.error) {
           this.props.handleUpdate()
         }
@@ -46,6 +46,10 @@ class ProfileHero extends React.Component {
             console.error('Error:', err)
           }
     }
+    else if(name==='setting'){
+      event.preventDefault();
+      this.props.history.push('/settings');
+    }
   }
   render () {
     const { username, bio, image, following } = this.props.profile
@@ -63,7 +67,9 @@ class ProfileHero extends React.Component {
             <Button
               content='Edit Profile Settings'
               icon='setting'
+              name='setting'
               labelPosition='left'
+              onClick={this.handleClick}
             />
           </div>
         )}
@@ -95,4 +101,4 @@ class ProfileHero extends React.Component {
     )
   }
 }
-export default ProfileHero
+export default withRouter(ProfileHero);

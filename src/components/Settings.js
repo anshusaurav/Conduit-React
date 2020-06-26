@@ -11,7 +11,8 @@ class Settings extends React.Component {
       bio: '',
       image: '',
       password: '',
-      errorMsgs:null
+      errorMsgs:null,
+      isProfileLoaded: false,
     }
     this.onChange = this.onChange.bind(this)
     this.onSubmit = this.onSubmit.bind(this)
@@ -105,6 +106,7 @@ class Settings extends React.Component {
         this.setState({ username: data.user.username })
         this.setState({ bio: data.user.bio })
         this.setState({ image: data.user.image })
+        this.setState({isProfileLoaded: true})
       }
     } catch (err) {
       console.error('Error:', err)
@@ -117,11 +119,11 @@ class Settings extends React.Component {
     this.props.onLogout()
   }
   render () {
-    const { image, bio, username, email, errorMsgs } = this.state;
+    const { image, bio, username, email, errorMsgs,isProfileLoaded } = this.state;
 
     return (
       <>
-        {!email ? (
+        {!isProfileLoaded ? (
           <FullPageFormLoader />
         ) : (
           <div>
