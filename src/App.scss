@@ -178,11 +178,15 @@ table {
 
 .hero-unsigned {
   text-align: center;
-  background-color: yellowgreen;
+  background-color: #5CB85C;
   padding: 0.5rem;
   h2 {
+    font-size: 3.5rem;
+    font-weight: 400;
+  }
+  h5{
     font-size: 2.5rem;
-    font-weight: 800;
+    font-weight: 400;
   }
 }
 
@@ -193,12 +197,10 @@ table {
   grid-gap: 0.5rem;
   .tabs-menu {
     .pointing {
-      
       .segment {
         padding: 0;
         padding-right: 0;
-      
-    }
+      }
       .item {
         font-weight: 500;
         font-size: 1.25rem;
@@ -208,6 +210,19 @@ table {
         font-weight: 500;
         font-size: 1.25rem;
         font-family: "IBM Plex Serif", serif;
+      }
+    }
+    
+    .bottom{
+      .buttons{
+        display: grid;
+        grid-template-columns: repeat(20, 1fr);
+        // align-content: center;
+        .button{
+          margin:0  0.25rem; 
+
+          margin-bottom: 0.25rem;
+        }
       }
     }
   }
@@ -406,6 +421,8 @@ body .ui.cards > .card {
       .button {
         margin-top: 0.5rem;
         margin-bottom: 0.5rem;
+        border-radius: 12px;
+        border: 1px solid #243a4c6f;
       }
     }
   }

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Item, Icon, Button } from 'semantic-ui-react'
+import { Item, Button } from 'semantic-ui-react'
 import {Link} from 'react-router-dom'
 class ArticlePreview extends React.Component {
   render () {
@@ -15,7 +15,7 @@ class ArticlePreview extends React.Component {
         <Item.Description>{description}</Item.Description>
         <Item.Extra>ReadMore</Item.Extra>
         {   tagList.map((elem,index) =>{
-                return <Button key={index} color='instagram' size='mini'>{elem}</Button>
+                return <Button key={index} color='instagram' size='mini'>#{elem}</Button>
                 })
             }
         {/* <Item.Extra className='tags'>{tags}</Item.Extra> */}
